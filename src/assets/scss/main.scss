@@ -1,0 +1,67 @@
+// Colors
+$color-primary: #5a40e2;
+$color-secondary: #4cc5f9;
+$color-black: #36394c;
+$color-black-light: #6f6f6f;
+$color-white: #ffffff;
+$color-red: #ee1f69;
+$color-green: #009950;
+$bg-color-app: #fbfbfb;
+$bg-color-violet: #f2f1fa;
+$bg-color-red: #ffeef3;
+$bg-color-green: #dcfbee;
+$bg-gradient-primary: linear-gradient(162.46deg, #5a40e2 0%, #4cc5f9 100%);
+$btn-gradient-primary: linear-gradient(
+  90deg,
+  #5a40e2 0%,
+  rgba(90, 64, 226, 0.7) 100%
+);
+$btn-gradient-secondary: linear-gradient(
+  90deg,
+  #4cc5f9 0%,
+  rgba(76, 197, 249, 0.7) 100%
+);
+
+// Responsive mixins
+$mobile: 375px;
+$mediumMobile: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1200px;
+$widescreen: 1400px;
+
+@mixin mobile() {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin mediumMobile() {
+  @media (min-width: #{$mediumMobile}) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin laptop() {
+  @media (min-width: #{$laptop}) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin widescreen() {
+  @media (min-width: #{$widescreen}) {
+    @content;
+  }
+}
