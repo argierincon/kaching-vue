@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  padding: 20px;
+  padding: 1.5rem 1.5rem 0;
   gap: 1rem;
   display: grid;
   grid-template-columns: 80px 1fr 30px;
