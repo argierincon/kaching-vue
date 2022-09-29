@@ -8,7 +8,7 @@
     >
       {{ tab }}
     </button>
-    <transition name="slide-fade">
+    <transition name="slide">
       <component :is="currentTab"></component>
     </transition>
   </section>
@@ -42,14 +42,14 @@ export default {
   }
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   transform: translateX(80px);
   opacity: 0;
 }
 
-.slide-fade-enter-active,
-.slide-fade-enter-to {
+.slide-enter-active,
+.slide-enter-to {
   transition: all 0.3s ease-out;
 }
 </style>
