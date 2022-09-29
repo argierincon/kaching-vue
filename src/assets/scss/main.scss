@@ -22,6 +22,13 @@ $btn-gradient-secondary: linear-gradient(
   rgba(76, 197, 249, 0.7) 100%
 );
 
+@mixin violet-box {
+  padding: 1rem;
+  color: $color-primary;
+  border-radius: 8px;
+  background-color: $bg-color-violet;
+}
+
 // Responsive mixins
 $mobile: 375px;
 $mediumMobile: 425px;
@@ -64,68 +71,4 @@ $widescreen: 1400px;
   @media (min-width: #{$widescreen}) {
     @content;
   }
-}
-
-// FONTS
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 100;
-  src: url("../assets/fonts/inter/Inter-Thin.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 200;
-  src: url("../assets/fonts/inter/Inter-ExtraLight.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 300;
-  src: url("../assets/fonts/inter/Inter-Light.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../assets/fonts/inter/Inter-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 500;
-  src: url("../assets/fonts/inter/Inter-Medium.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 600;
-  src: url("../assets/fonts/inter/Inter-SemiBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../assets/fonts/inter/Inter-Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 800;
-  src: url("../assets/fonts/inter/Inter-ExtraBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "inter";
-  font-style: normal;
-  font-weight: 900;
-  src: url("../assets/fonts/inter/Inter-Black.ttf") format("truetype");
 }
