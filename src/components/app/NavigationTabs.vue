@@ -21,34 +21,33 @@
 </template>
 
 <script>
+import BalanceBox from "@/components/app/BalanceBox.vue";
+import TransactionBox from "@/components/app/TransactionBox.vue";
+
 export default {
-  props: {
-    tabs: {
-      type: Array,
-      required: true,
-    },
-  },
+  components: { BalanceBox, TransactionBox },
   data() {
     return {
-      currentTab: null,
-      // tabs: [
-      //   {
-      //     isActive: true,
-      //     label: "Total ahorrado",
-      //     component: "BalanceBox",
-      //   },
-      // ],
+      currentTab: "BalanceBox",
+      tabs: [
+        {
+          isActive: true,
+          label: "Total ahorrado",
+          component: "BalanceBox",
+        },
+        {
+          isActive: false,
+          label: "Actividad reciente",
+          component: "TransactionBox",
+        },
+      ],
     };
-  },
-  mounted() {
-    this.currentTab = this.tabs[0].component;
   },
   methods: {
     switchTab(tab) {
       this.currentTab = tab.component;
       this.tabs.find((tab) => tab.isActive).isActive = false;
       tab.isActive = true;
-      console.log(tab, "TAB");
     },
   },
 };
