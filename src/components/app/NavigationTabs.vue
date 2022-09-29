@@ -63,6 +63,10 @@ export default {
 }
 
 .tabs {
+  overflow: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+
   ul {
     display: flex;
     align-items: center;
