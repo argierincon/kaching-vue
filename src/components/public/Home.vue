@@ -10,7 +10,7 @@
         <TransactionBox class="income" />
         <TransactionBox class="outcome" />
       </section>
-      <NavigationTabs class="nav-tabs" />
+      <NavigationTabs class="nav-tabs" :tabs="tabs" />
     </template>
 
     <template #nav-menu>
@@ -38,16 +38,21 @@ export default {
   },
   data() {
     return {
-      currentTabComponent: BalanceBox,
+      tabs: [
+        {
+          isActive: true,
+          label: "Total ahorrado",
+          component: BalanceBox,
+        },
+        {
+          isActive: false,
+          label: "Actividad reciente",
+          component: TransactionBox,
+        },
+      ],
     };
   },
-  methods: {
-    test() {
-      console.log("A");
-      this.currentTabComponent = TransactionBox;
-      console.log(this.currentTabComponent);
-    },
-  },
+  methods: {},
 };
 </script>
 
