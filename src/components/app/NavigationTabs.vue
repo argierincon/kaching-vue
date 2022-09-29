@@ -21,27 +21,27 @@
 </template>
 
 <script>
-import BalanceBox from "@/components/app/BalanceBox.vue";
-import TransactionBox from "@/components/app/TransactionBox.vue";
-
 export default {
-  components: { BalanceBox, TransactionBox },
+  props: {
+    tabs: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
-      currentTab: "BalanceBox",
-      tabs: [
-        {
-          isActive: true,
-          label: "Total ahorrado",
-          component: "BalanceBox",
-        },
-        {
-          isActive: false,
-          label: "Actividad reciente",
-          component: "TransactionBox",
-        },
-      ],
+      currentTab: null,
+      // tabs: [
+      //   {
+      //     isActive: true,
+      //     label: "Total ahorrado",
+      //     component: "BalanceBox",
+      //   },
+      // ],
     };
+  },
+  mounted() {
+    this.currentTab = this.tabs[0].component;
   },
   methods: {
     switchTab(tab) {
@@ -62,10 +62,6 @@ export default {
 }
 
 .tabs {
-  overflow: hidden;
-  overflow-x: auto;
-  white-space: nowrap;
-
   ul {
     display: flex;
     align-items: center;
@@ -107,6 +103,6 @@ export default {
 
 .fade-enter-active,
 .fade-enter-to {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease-out;
 }
 </style>
