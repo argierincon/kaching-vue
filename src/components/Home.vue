@@ -5,11 +5,16 @@
     </template>
 
     <template #main-content>
-      <h6>Holi</h6>
+      <section class="home-grid">
+        <BalanceBox class="balance" />
+        <TransactionBox class="income" />
+        <TransactionBox class="outcome" />
+      </section>
+      <NavigationTabs class="nav-tabs" />
     </template>
 
     <template #nav-menu>
-      <Header />
+      <NavMenu />
     </template>
   </Layout>
 </template>
@@ -17,10 +22,58 @@
 <script>
 import Layout from "@/components/layouts/Default.vue";
 import Header from "@/components/Header.vue";
+import BalanceBox from "@/components/app/BalanceBox.vue";
+import TransactionBox from "@/components/app/TransactionBox.vue";
+import NavMenu from "@/components/app/NavMenu.vue";
+import NavigationTabs from "@/components/app/NavigationTabs.vue";
+
 export default {
   components: {
-    Header,
     Layout,
+    Header,
+    BalanceBox,
+    TransactionBox,
+    NavigationTabs,
+    NavMenu,
+  },
+  data() {
+    return {
+      currentTabComponent: BalanceBox,
+    };
+  },
+  methods: {
+    test() {
+      console.log("A");
+      this.currentTabComponent = TransactionBox;
+      console.log(this.currentTabComponent);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.home-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "A A A A   A A A A"
+    "B B B B   C C C C"
+    "B B B B   C C C C";
+}
+
+.balance {
+  grid-area: A;
+}
+
+.income {
+  grid-area: B;
+}
+
+.outcome {
+  grid-area: C;
+}
+
+.nav-tabs {
+  margin-top: 1.25rem;
+}
+</style>
