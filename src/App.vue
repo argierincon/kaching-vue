@@ -21,7 +21,7 @@ export default {
         new Promise((resolve) => {
           setTimeout(() => {
             resolve(require("./components/Home.vue"));
-          }, 2500);
+          }, 1000);
         })
     ),
     SplashScreen,
@@ -31,4 +31,5 @@ export default {
 
 <style>
 @import "./assets/scss/reset.scss";
+@import "./assets/scss/fonts.scss";
 </style>
