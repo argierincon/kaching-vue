@@ -21,7 +21,7 @@
 
 <script>
 import Layout from "@/components/layouts/Default.vue";
-import Header from "@/components/Header.vue";
+import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
 import TransactionBox from "@/components/app/TransactionBox.vue";
 import NavMenu from "@/components/app/NavMenu.vue";
