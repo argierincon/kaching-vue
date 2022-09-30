@@ -1,22 +1,20 @@
 <template>
-  <section class="navigation-tabs">
-    <nav class="tabs">
-      <ul>
-        <li
-          v-for="(tab, idx) in tabs"
-          :key="tab"
-          :class="{ 'is-active': tab.isActive }"
-          @click="() => switchTab(tab, idx)"
-        >
-          {{ tab.label }}
-        </li>
-      </ul>
-    </nav>
-    <section class="tab-content">
-      <transition name="fade">
-        <component :is="currentTab"></component>
-      </transition>
-    </section>
+  <nav class="tabs">
+    <ul>
+      <li
+        v-for="(tab, idx) in tabs"
+        :key="tab"
+        :class="{ 'is-active': tab.isActive }"
+        @click="() => switchTab(tab, idx)"
+      >
+        {{ tab.label }}
+      </li>
+    </ul>
+  </nav>
+  <section class="tab-content">
+    <transition name="fade">
+      <component :is="currentTab"></component>
+    </transition>
   </section>
 </template>
 
@@ -54,13 +52,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navigation-tabs {
-  button {
-    margin: 1rem 1rem 1rem 0;
-    cursor: pointer;
-  }
-}
-
 .tabs {
   ul {
     display: flex;
