@@ -7,8 +7,8 @@
     <template #main-content>
       <section class="home-grid">
         <BalanceBox class="balance" />
-        <TransactionBox class="income" />
-        <TransactionBox class="outcome" />
+        <IncomeOutcomeBox class="income" />
+        <IncomeOutcomeBox class="outcome" />
       </section>
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
     </template>
@@ -23,16 +23,18 @@
 import Layout from "@/components/layouts/Default.vue";
 import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
-import TransactionBox from "@/components/app/TransactionBox.vue";
-import NavMenu from "@/components/app/NavMenu.vue";
+import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
+import SavingsChart from "@/components/app/SavingsChart.vue";
+import RecentTransactionsSection from "@/components/app/RecentTransactionsSection.vue";
+import NavMenu from "@/components/app/NavMenu.vue";
 
 export default {
   components: {
     Layout,
     Header,
     BalanceBox,
-    TransactionBox,
+    IncomeOutcomeBox,
     NavigationTabs,
     NavMenu,
   },
@@ -42,12 +44,12 @@ export default {
         {
           isActive: true,
           label: "Total ahorrado",
-          component: BalanceBox,
+          component: SavingsChart,
         },
         {
           isActive: false,
-          label: "Actividad reciente",
-          component: TransactionBox,
+          label: "Transacciones recientes",
+          component: RecentTransactionsSection,
         },
       ],
     };
