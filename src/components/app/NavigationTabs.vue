@@ -55,11 +55,13 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
+  overflow: hidden;
+  overflow-x: auto;
+
   ul {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    overflow-x: auto;
     border-bottom-color: #dbdbdb;
     border-bottom-style: solid;
     border-bottom-width: 1px;
