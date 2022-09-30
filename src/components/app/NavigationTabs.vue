@@ -1,20 +1,22 @@
 <template>
-  <nav class="tabs">
-    <ul>
-      <li
-        v-for="(tab, idx) in tabs"
-        :key="tab"
-        :class="{ 'is-active': tab.isActive }"
-        @click="() => switchTab(tab, idx)"
-      >
-        {{ tab.label }}
-      </li>
-    </ul>
-  </nav>
-  <section class="tab-content">
-    <transition name="fade">
-      <component :is="currentTab"></component>
-    </transition>
+  <section>
+    <nav class="tabs">
+      <ul>
+        <li
+          v-for="(tab, idx) in tabs"
+          :key="tab"
+          :class="{ 'is-active': tab.isActive }"
+          @click="() => switchTab(tab, idx)"
+        >
+          {{ tab.label }}
+        </li>
+      </ul>
+    </nav>
+    <section class="tab-content">
+      <transition name="fade">
+        <component :is="currentTab"></component>
+      </transition>
+    </section>
   </section>
 </template>
 
@@ -57,11 +59,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex-grow: 1;
-    flex-shrink: 0;
+    overflow-x: auto;
     border-bottom-color: #dbdbdb;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    white-space: nowrap;
 
     li {
       padding: 0.5em 1em;
