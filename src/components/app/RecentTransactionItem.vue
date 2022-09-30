@@ -1,13 +1,13 @@
 <template>
-  <div :class="`box-transaction ${propItem.class}`">
+  <div :class="`box-transaction ${elemsItem.class}`">
     <svg-icon
       class="box-transaction__icon"
       type="mdi"
-      :path="propItem.icon"
+      :path="elemsItem.icon"
       :size="18"
     ></svg-icon>
     <p class="box-transaction__description">{{ description }}</p>
-    <p class="box-transaction__amount">{{ propItem.amount }}</p>
+    <p class="box-transaction__amount">{{ elemsItem.amount }}</p>
   </div>
 </template>
 
@@ -34,17 +34,17 @@ const { description, amount, transactionType } = toRefs(props);
 
 const currencyAmount = computed(() => currencyFormater.format(amount.value));
 
-const propItem =
+const elemsItem =
   transactionType.value === "income"
     ? {
         class: "box-transaction--income",
         icon: iconIncome,
-        amount: `+ ${currencyAmount.value}`,
+        amount: currencyAmount.value,
       }
     : {
         class: "box-transaction--outcome",
         icon: iconOutcome,
-        amount: `- ${currencyAmount.value}`,
+        amount: `-${currencyAmount.value}`,
       };
 </script>
 
