@@ -14,6 +14,8 @@ export default {};
 
 <style lang="scss" scoped>
 .default-layout {
+  padding-bottom: 60px;
+
   main {
     padding: 1.5rem;
   }
