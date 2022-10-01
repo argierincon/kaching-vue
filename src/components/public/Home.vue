@@ -25,9 +25,9 @@ import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
 import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
-import SavingsChart from "@/components/app/SavingsChart.vue";
+import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/RecentTransactionsSection.vue";
-import NavMenu from "@/components/app/NavMenu.vue";
+import NavMenu from "@/components/app/navMenu/Index.vue";
 
 export default {
   components: {
@@ -43,7 +43,7 @@ export default {
       tabs: [
         {
           isActive: true,
-          label: "Total ahorrado",
+          label: "Gráfico de ahorro",
           component: SavingsChart,
         },
         {
