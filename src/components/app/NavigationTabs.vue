@@ -54,6 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
 .tabs {
   overflow: hidden;
   overflow-x: auto;
