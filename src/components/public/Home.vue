@@ -26,7 +26,7 @@ import BalanceBox from "@/components/app/BalanceBox.vue";
 import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
-import RecentTransactionsSection from "@/components/app/RecentTransactionsSection.vue";
+import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
 import NavMenu from "@/components/app/navMenu/Index.vue";
 
 export default {
