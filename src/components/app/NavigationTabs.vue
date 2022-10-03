@@ -89,7 +89,7 @@ export default {
 }
 
 .tab-content {
-  padding: 1rem 0;
+  padding-top: 1.5rem;
 }
 
 // Clases de transicion
