@@ -7,7 +7,7 @@
       class="graphic__svg"
       viewBox="0 0 300 200"
     >
-      <!-- line x -->
+      <!-- line x zero -->
       <line
         stroke="#cacaca"
         stroke-width="1.8"
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, computed, ref } from "vue";
+import { defineProps, defineEmits, ref, toRefs, computed, watch } from "vue";
 
 const props = defineProps({
   amounts: { type: Array, default: () => [] },
@@ -63,15 +63,24 @@ const zero = computed(() => {
 
 const chartPoints = computed(() => {
   const total = amounts.value.length;
+
   return amounts.value.reduce((accPoints, currentAmount, idx) => {
     const x = (300 / total) * (idx + 1);
     const y = amountToPixels(currentAmount);
-    return `${accPoints} ${x}, ${y} `;
-  }, "0, 100");
+    return `${accPoints} ${x}, ${y}`;
+  }, `0, ${amountToPixels(amounts.value.length ? amounts.value[0] : 0)}`);
 });
 
 const showPointer = ref(false);
 const pointer = ref(0);
+
+const emit = defineEmits(["pointSelected"]);
+
+watch(pointer, (value) => {
+  const index = Math.ceil(value / (300 / amounts.value.length));
+  if (index < 0 || index > amounts.value.length) return;
+  emit("pointSelected", amounts.value[index - 1]);
+});
 
 const tap = ({ target, touches }) => {
   showPointer.value = true;
