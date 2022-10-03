@@ -6,8 +6,8 @@
       :path="elemsItem.icon"
       :size="18"
     ></svg-icon>
-    <p class="box-transaction__description">{{ description }}</p>
-    <p class="box-transaction__amount">{{ elemsItem.amount }}</p>
+    <p class="box-transaction__name">{{ transactionName }}</p>
+    <p class="box-transaction__amount">{{ currencyAmount }}</p>
   </div>
 </template>
 
@@ -22,15 +22,15 @@ const iconIncome = mdiArrowTopRight;
 const iconOutcome = mdiArrowBottomRight;
 
 const props = defineProps({
-  description: {
+  transactionName: {
     type: String,
-    default: "Description",
+    default: "transaction name",
   },
   amount: { type: Number, default: 100 },
   transactionType: { type: String, default: "income" },
 });
 
-const { description, amount, transactionType } = toRefs(props);
+const { name, amount, transactionType } = toRefs(props);
 
 const currencyAmount = computed(() => currencyFormater.format(amount.value));
 
@@ -39,12 +39,10 @@ const elemsItem =
     ? {
         class: "box-transaction--income",
         icon: iconIncome,
-        amount: currencyAmount.value,
       }
     : {
         class: "box-transaction--outcome",
         icon: iconOutcome,
-        amount: `-${currencyAmount.value}`,
       };
 </script>
 
@@ -65,7 +63,7 @@ const elemsItem =
     font-size: 12px;
   }
 
-  &__description,
+  &__name,
   &__amount {
     font-size: 0.8rem;
   }
