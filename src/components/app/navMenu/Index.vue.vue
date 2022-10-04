@@ -23,7 +23,7 @@ export default {
         {
           id: "1",
           icon: mdiHome,
-          label: "Home",
+          label: "Inicio",
         },
         {
           id: "2",
