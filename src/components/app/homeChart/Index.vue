@@ -110,9 +110,6 @@ export default {
     showAmount() {
       return this.amount !== null ? this.amount : this.totalAmount;
     },
-    amountCurrency() {
-      return currencyFormater.format(this.showAmount);
-    },
     listAmounts() {
       const last30Days = this.movements.filter((m) => {
         const today = new Date();
@@ -144,6 +141,8 @@ export default {
       const label = this.formatingDate(pointSelected);
       this.graphicLabel = `${label[0].toUpperCase()}${label.substring(1)}`;
 
+      this.amount = pointSelected;
+
       if (pointSelected === undefined) {
         this.amount = this.listAmounts[0];
       }
@@ -157,12 +156,12 @@ export default {
       };
 
       if (pointSelected === undefined) {
-        return this.movements[0].date.toLocaleDateString("es-PE", options);
+        return this.movements[0].date.toLocaleDateString("es-MX", options);
       }
 
       return this.movements
         .find((ele) => ele.sum === pointSelected)
-        .date.toLocaleDateString("es-PE", options);
+        .date.toLocaleDateString("es-MX", options);
     },
   },
 };
