@@ -43,7 +43,7 @@ export default {
       tabs: [
         {
           isActive: true,
-          label: "Gráfico de ahorro",
+          label: "Gráfico de balance",
           component: SavingsChart,
         },
         {
