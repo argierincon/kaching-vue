@@ -141,8 +141,8 @@ export default {
   },
   methods: {
     selected(pointSelected) {
-      this.graphicLabel = this.formatingDate(pointSelected);
-      this.amount = pointSelected;
+      const label = this.formatingDate(pointSelected);
+      this.graphicLabel = `${label[0].toUpperCase()}${label.substring(1)}`;
 
       if (pointSelected === undefined) {
         this.amount = this.listAmounts[0];
