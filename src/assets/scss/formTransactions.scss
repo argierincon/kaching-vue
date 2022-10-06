@@ -1,0 +1,22 @@
+.form-add-transaction {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    margin-bottom: 1rem;
+    color: $color-primary;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+
+    @include tablet {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

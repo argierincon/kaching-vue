@@ -1,19 +1,10 @@
 <template>
   <form action="" class="form-add-transaction">
-    <p>Registrar Ingreso</p>
-    <select name="tipo">
-      <option value="">Transferencia</option>
-      <option value="">Efectivo</option>
-    </select>
-    <input placeholder="Titular" type="text" />
-    <input placeholder="Monto" type="text" />
-    <textarea
-      name=""
-      id=""
-      cols="30"
-      rows="10"
-      placeholder="Descripcion"
-    ></textarea>
+    <h4 class="form-add-transaction__title">Registrar Ingreso</h4>
+    <Select label="Tipo de ingreso" />
+    <Input label="Titular" placeholder="Ingresa el titular" />
+    <Input type="number" label="Monto" placeholder="Ingresa el monto" />
+    <Textarea label="Descripción" />
 
     <div class="form-add-transaction__buttons">
       <Btn label="Cancelar" btnType="secondary" />
@@ -24,20 +15,11 @@
 
 <script setup>
 import Btn from "../../public/Btn.vue";
+import Input from "../../inputs/Input.vue";
+import Select from "../../inputs/Select.vue";
+import Textarea from "../../inputs/Textarea.vue";
 </script>
 
 <style lang="scss" scoped>
-.form-add-transaction {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  // align-items: center;
-  background: thistle;
-
-  &__buttons {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-}
+@import "../../../assets/scss/formTransactions.scss";
 </style>
