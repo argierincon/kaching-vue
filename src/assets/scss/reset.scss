@@ -16,7 +16,7 @@ html {
 
 body {
   background: #fbfbfb;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -44,6 +44,12 @@ body {
 
 button {
   border: 0;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #b5b5b5;
 }
 
 *:before,
@@ -194,4 +200,10 @@ menu,
 nav,
 section {
   display: block;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
 }
