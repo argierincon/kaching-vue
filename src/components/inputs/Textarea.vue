@@ -2,9 +2,8 @@
   <div class="field">
     <label class="label">{{ label }}</label>
     <textarea
+      v-model="localModel"
       class="textarea"
-      name=""
-      id=""
       rows="4"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -16,23 +15,25 @@
 export default {
   props: {
     type: { type: String, default: "text" },
-    vmodel: { type: String, default: "" },
+    modelValue: { type: String, default: "" },
     label: { type: String, default: "Label" },
     placeholder: { type: String, default: "Placeholder" },
     disabled: { type: String, default: false },
+  },
+  computed: {
+    localModel: {
+      get() {
+        return this.modelValue;
+      },
+      set(newValue) {
+        this.$emit("update:modelValue", newValue);
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.field {
-  @include field-styles;
-}
-
-.label {
-  @include label-field;
-}
-
 .textarea {
   @include standard-inputs;
   @include inset-shadow-inputs;
