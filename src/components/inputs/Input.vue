@@ -3,7 +3,7 @@
     <label class="label">{{ label }}</label>
     <input
       class="input"
-      v-model="vmodel"
+      v-model="localModel"
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -15,23 +15,28 @@
 export default {
   props: {
     type: { type: String, default: "text" },
-    vmodel: { type: String, default: "" },
+    modelValue: { type: String, default: "" },
     label: { type: String, default: "Label" },
     placeholder: { type: String, default: "Placeholder" },
     disabled: { type: String, default: false },
+  },
+  computed: {
+    localModel: {
+      get() {
+        return this.modelValue;
+      },
+      set(newValue) {
+        this.$emit("update:modelValue", newValue);
+      },
+    },
+    isEmpty() {
+      this.modelValue === null ? "is-empty" : "";
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.field {
-  @include field-styles;
-}
-
-.label {
-  @include label-field;
-}
-
 .input {
   @include standard-inputs;
   @include inset-shadow-inputs;
