@@ -35,7 +35,6 @@ export default {
       },
     },
     isEmpty() {
-      console.log(this.modelValue, "modelValue");
       return this.modelValue === null ? "is-empty" : "";
     },
   },
