@@ -1,6 +1,6 @@
 <template>
   <button
-    type="button"
+    :type="type"
     :class="`btn ${btnClass}`"
     :disabled="isDisabled"
     @click="onClick"
@@ -28,9 +28,7 @@ const props = defineProps({
   },
   onClick: {
     type: Function,
-    default: () => {
-      console.log("HOLI");
-    },
+    required: true,
   },
 });
 
