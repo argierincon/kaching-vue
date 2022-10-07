@@ -59,10 +59,6 @@ const elemsItem =
   border-left: 4px solid #333;
   filter: drop-shadow(0px 0px 1px rgba(23, 43, 77, 0.2));
 
-  &__icon {
-    font-size: 12px;
-  }
-
   &__name,
   &__amount {
     font-size: 0.8rem;
