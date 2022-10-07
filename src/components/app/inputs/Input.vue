@@ -69,7 +69,6 @@ export default {
   position: absolute;
   left: 1em;
   font-size: 0.75rem;
-  // background-color: transparent;
   z-index: 5;
   white-space: nowrap;
   text-overflow: ellipsis;

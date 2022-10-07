@@ -67,14 +67,14 @@ export default {
 }
 
 .select {
-  cursor: pointer;
-
   @include standard-inputs;
+  padding-right: 2.5em;
   width: 100%;
   position: relative;
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
+  cursor: pointer;
 
   &::-ms-expand {
     display: none;
