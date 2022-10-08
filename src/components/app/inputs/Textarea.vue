@@ -6,6 +6,7 @@
       class="textarea"
       rows="4"
       :placeholder="placeholder"
+      :required="required"
       :disabled="disabled"
     ></textarea>
   </div>
@@ -18,6 +19,7 @@ export default {
     modelValue: { type: String, default: "" },
     label: { type: String, default: "Label" },
     placeholder: { type: String, default: "Placeholder" },
+    required: { type: String, default: false },
     disabled: { type: String, default: false },
   },
   computed: {

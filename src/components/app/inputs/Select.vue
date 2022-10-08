@@ -6,6 +6,7 @@
         :class="{ select: true, 'is-empty': isEmpty }"
         v-model="localModel"
         :placeholder="placeholder"
+        :required="required"
         :disabled="disabled"
       >
         <option v-if="localModel === null" :value="null" disabled hidden>
@@ -23,6 +24,7 @@ export default {
     modelValue: { type: String },
     label: { type: String, default: "Label" },
     placeholder: { type: String, default: "Placeholder" },
+    required: { type: String, default: false },
     disabled: { type: String, default: false },
   },
   computed: {
