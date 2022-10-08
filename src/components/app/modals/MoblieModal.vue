@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <div class="modal-overlay" v-if="showModal" @click="close"></div>
+    <div class="modal-overlay" v-if="showModal" @click="closeOut"></div>
   </transition>
   <transition name="pop" appear>
     <div class="modal-content" role="dialog" v-if="showModal">
@@ -16,21 +16,28 @@
   </transition>
 </template>
 
-<script>
+<script setup>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiCloseCircle } from "@mdi/js";
 
-export default {
-  components: { SvgIcon },
-  data: () => ({ mdiCloseCircle }),
-  props: {
-    showModal: { type: Boolean, required: true },
-  },
-  methods: {
-    close() {
-      this.$emit("close");
-    },
-  },
+import { defineProps, toRefs, ref } from "vue";
+
+const props = defineProps({
+  showModal: { type: Boolean, required: true },
+  closeOutside: { type: Boolean, required: true },
+  test: { type: String, required: true },
+  b: { type: Boolean, required: true },
+});
+
+const { showModal, closeOutside } = toRefs(props);
+
+const emit = defineEmits(["close"]);
+const close = () => emit("close");
+
+const closeOut = () => {
+  if (closeOutside.value) {
+    close();
+  }
 };
 </script>
 
