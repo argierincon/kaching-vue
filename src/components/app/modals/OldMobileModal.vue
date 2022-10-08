@@ -1,7 +1,9 @@
 <template>
-  <transition name="fade" appear>
-    <section class="modal">
-      <div class="modal-bg"></div>
+  <section class="modal">
+    <transition name="fade">
+      <div class="modal-overlay"></div>
+    </transition>
+    <transition name="pop">
       <div class="modal-content">
         <svg-icon
           class="close-icon"
@@ -12,8 +14,8 @@
         ></svg-icon>
         <slot></slot>
       </div>
-    </section>
-  </transition>
+    </transition>
+  </section>
 </template>
 
 <script setup>
@@ -26,10 +28,10 @@ import { defineEmits } from "vue";
 
 const emit = defineEmits(["close"]);
 
-const close = () => {
-  console.log("CERRÓ");
-  return emit("close");
-};
+// const close = () => {
+//   console.log("CERRÓ");
+//   return emit("close");
+// };
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +55,7 @@ const close = () => {
   }
 }
 
-.modal-bg {
+.modal-overlay {
   background-color: $color-white;
 
   @include tablet {
@@ -96,25 +98,24 @@ const close = () => {
 }
 
 // Clases de transicion
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s linear;
-}
-
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
 
-.pop-enter-active,
-.pop-leave-active {
-  transition: transform 0.2s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.2s linear;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s linear;
 }
 
-.pop-enter,
+.pop-enter-from,
 .pop-leave-to {
   opacity: 0;
   transform: scale(0.3) translateY(-50%);
+}
+
+.pop-enter-active,
+.pop-leave-active {
+  transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.4s linear;
 }
 </style>
