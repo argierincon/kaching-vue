@@ -5,6 +5,7 @@
       label="Tipo de ingreso"
       placeholder="Selecciona el tipo de ingreso"
       v-model="incomeType"
+      required
     >
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
@@ -19,6 +20,7 @@
       label="Monto"
       placeholder="Ingresa el monto"
       v-model="amount"
+      required
     />
     <v-textarea label="Descripción" v-model="description" />
 
