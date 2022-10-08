@@ -10,7 +10,7 @@
         <IncomeOutcomeBox class="income" />
         <IncomeOutcomeBox class="outcome" />
       </section>
-      <MoblieModal :showModal="showModalHome" @close="closeModal">
+      <MoblieModal :showModal="showModalHome" @close="closeModal" closeOutside>
         <AddIncome :btnCancel="() => closeModal()" />
       </MoblieModal>
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
