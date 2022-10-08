@@ -1,47 +1,34 @@
 <template>
   <nav class="nav-menu">
     <MenuItem
-      v-for="item in optMenu"
+      v-for="item in optionsMenu"
       :key="item.id"
       :label="item.label"
       :icon="item.icon"
+      :onClick="item.click"
     />
   </nav>
 </template>
 
 <script>
-import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
+import { mdiHome } from "@mdi/js";
 import MenuItem from "./MenuItem.vue";
 
 export default {
   components: {
     MenuItem,
   },
-  data() {
-    return {
-      optMenu: [
+  props: {
+    optionsMenu: {
+      type: Array,
+      default: () => [
         {
           id: "1",
           icon: mdiHome,
           label: "Inicio",
         },
-        {
-          id: "2",
-          icon: mdiCashMinus,
-          label: "Ingreso",
-        },
-        {
-          id: "3",
-          icon: mdiCashPlus,
-          label: "Egreso",
-        },
-        {
-          id: "4",
-          icon: mdiCashClock,
-          label: "Historial",
-        },
       ],
-    };
+    },
   },
 };
 </script>
