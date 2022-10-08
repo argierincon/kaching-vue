@@ -1,32 +1,46 @@
 <template>
   <form @submit.prevent="submit" ref="form" class="form-add-transaction">
     <h4 class="form-add-transaction__title">Registrar Ingreso</h4>
-    <Select label="Tipo de ingreso" v-model="incomeType">
+    <v-select
+      label="Tipo de ingreso"
+      placeholder="Selecciona el tipo de ingreso"
+      v-model="incomeType"
+    >
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
-    </Select>
-    <Input label="Titular" placeholder="Ingresa el titular" v-model="holder" />
-    <Input
+    </v-select>
+    <v-input
+      label="Titular"
+      placeholder="Ingresa el titular"
+      v-model="holder"
+    />
+    <v-input
       type="number"
       label="Monto"
       placeholder="Ingresa el monto"
       v-model="amount"
     />
-    <Textarea label="Descripción" v-model="description" />
+    <v-textarea label="Descripción" v-model="description" />
 
     <div class="form-add-transaction__buttons">
-      <Btn label="Cancelar" btnType="secondary" />
+      <Btn label="Cancelar" btnType="secondary" :onClick="btnCancel" />
       <Btn label="Guardar" type="submit" />
     </div>
   </form>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Btn from "../../public/Btn.vue";
-import Input from "../../inputs/Input.vue";
-import Select from "../../inputs/Select.vue";
-import Textarea from "../../inputs/Textarea.vue";
+import { defineProps, toRefs, ref } from "vue";
+import Btn from "@/components/public/Btn.vue";
+import vInput from "@/components/app/inputs/Input.vue";
+import vSelect from "@/components/app/inputs/Select.vue";
+import vTextarea from "@/components/app/inputs/Textarea.vue";
+
+const props = defineProps({
+  btnCancel: { type: Function, default: () => console.log("PRUEB") },
+});
+
+const { btnCancel } = toRefs(props);
 
 const incomeType = ref(null);
 const holder = ref("");
@@ -36,8 +50,9 @@ const description = ref("");
 const form = ref("");
 
 const submit = () => {
-  console.log("SUBMIT");
+  btnCancel.value();
   form.value.reset();
+  console.log("SUBMIT");
 };
 </script>
 
