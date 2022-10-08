@@ -10,16 +10,21 @@
         <IncomeOutcomeBox class="income" />
         <IncomeOutcomeBox class="outcome" />
       </section>
+      <MoblieModal :showModal="showModalHome" @close="closeModal">
+        <AddIncome :btnCancel="() => closeModal()" />
+      </MoblieModal>
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
     </template>
 
     <template #nav-menu>
-      <NavMenu />
+      <NavMenu :optionsMenu="optMenu" />
     </template>
   </Layout>
 </template>
 
 <script>
+import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
+
 import Layout from "@/components/layouts/Default.vue";
 import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
@@ -28,6 +33,9 @@ import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
 import NavMenu from "@/components/app/navMenu/Index.vue";
+import AddIncome from "@/components/app/formAddTransaction/AddIncome.vue";
+
+import MoblieModal from "@/components/app/modals/MoblieModal.vue";
 
 export default {
   components: {
@@ -37,9 +45,12 @@ export default {
     IncomeOutcomeBox,
     NavigationTabs,
     NavMenu,
+    AddIncome,
+    MoblieModal,
   },
   data() {
     return {
+      showModalHome: false,
       tabs: [
         {
           isActive: true,
@@ -52,9 +63,36 @@ export default {
           component: RecentTransactionsSection,
         },
       ],
+      optMenu: [
+        {
+          id: "1",
+          icon: mdiHome,
+          label: "Inicio",
+        },
+        {
+          id: "2",
+          icon: mdiCashPlus,
+          label: "Ingreso",
+          click: this.closeModal,
+        },
+        {
+          id: "1",
+          icon: mdiCashMinus,
+          label: "Egreso",
+        },
+        {
+          id: "4",
+          icon: mdiCashClock,
+          label: "Historial",
+        },
+      ],
     };
   },
-  methods: {},
+  methods: {
+    closeModal() {
+      this.showModalHome = !this.showModalHome;
+    },
+  },
 };
 </script>
 
