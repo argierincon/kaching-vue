@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item">
+  <div class="menu-item" @click="onClick">
     <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
     <p class="label">{{ label }}</p>
   </div>
@@ -16,6 +16,7 @@ export default {
   props: {
     icon: { type: String, default: mdiBell },
     label: { type: String, default: "HOME" },
+    onClick: { type: Function, required: true },
   },
 };
 </script>
