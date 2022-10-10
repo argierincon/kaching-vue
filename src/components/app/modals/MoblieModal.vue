@@ -50,7 +50,7 @@ const closeOut = () => {
 }
 
 .modal-overlay {
-  background-color: $color-white;
+  background-color: transparent;
 
   @include tablet {
     @include positions;
