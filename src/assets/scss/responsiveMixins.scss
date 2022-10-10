@@ -1,6 +1,6 @@
 // Responsive mixins
 $mobile: 375px;
-$mediumMobile: 425px;
+$medium-mobile: 425px;
 $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1200px;
@@ -12,8 +12,8 @@ $widescreen: 1400px;
   }
 }
 
-@mixin mediumMobile() {
-  @media (min-width: #{$mediumMobile}) {
+@mixin medium-mobile() {
+  @media (min-width: #{$medium-mobile}) {
     @content;
   }
 }
