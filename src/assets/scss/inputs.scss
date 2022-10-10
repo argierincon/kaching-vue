@@ -16,6 +16,18 @@
   }
 }
 
+.mini-label {
+  font-size: 0.7rem;
+
+  &--optional {
+    color: $color-black-blue;
+  }
+
+  &--required {
+    color: #f14668;
+  }
+}
+
 @mixin standard-inputs {
   padding: calc(0.5em - 1px) calc(0.75em - 1px);
   background-color: $color-white;
