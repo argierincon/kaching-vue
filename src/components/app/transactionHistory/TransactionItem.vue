@@ -10,29 +10,34 @@
         size="20"
         :path="mdiFood"
       ></svg-icon>
-      <p class="transaction-title">Titulo de la transacción</p>
-      <p>-S/ 3,500.40</p>
+      <p class="transaction-title">{{ title }}</p>
+      <p class="transaction-amount">{{ currencyAmount }}</p>
     </div>
-    <div class="item-transaction__content">
+    <div v-show="description" class="item-transaction__content">
       <p>
-        Icon collection allows designers and developers targeting various
-        platforms to download icons in the format.
+        {{ description }}
       </p>
     </div>
   </article>
 </template>
 
 <script setup>
-import { defineProps, toRefs } from "vue";
+import { defineProps, toRefs, computed } from "vue";
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiFood, mdiDotsVertical } from "@mdi/js";
+
+import { currencyFormater } from "/utils/currencyFormater";
 
 const props = defineProps({
   type: { type: String },
+  title: { type: String },
+  amount: { type: String },
+  description: { type: String },
 });
 
-const { type } = toRefs(props);
+const { type, title, amount, description } = toRefs(props);
 
-import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiFood, mdiDotsVertical } from "@mdi/js";
+const currencyAmount = computed(() => currencyFormater.format(amount.value));
 </script>
 
 <style lang="scss" scoped>
@@ -49,12 +54,12 @@ import { mdiFood, mdiDotsVertical } from "@mdi/js";
 
   &__header {
     display: grid;
-    grid-template-columns: 20px 1fr 100px;
+    grid-template-columns: 20px 1fr auto 10px;
     align-items: center;
     gap: 0.5rem;
 
-    @include medium-mobile {
-      grid-template-columns: 20px 1fr 110px;
+    @include tablet {
+      grid-template-columns: 20px 1fr auto 15px;
     }
 
     p {
@@ -99,5 +104,8 @@ import { mdiFood, mdiDotsVertical } from "@mdi/js";
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+.transaction-amount {
+  margin-left: auto;
 }
 </style>
