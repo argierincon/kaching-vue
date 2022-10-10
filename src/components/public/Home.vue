@@ -10,8 +10,19 @@
         <IncomeOutcomeBox class="income" />
         <IncomeOutcomeBox class="outcome" />
       </section>
-      <MoblieModal :showModal="showModalHome" @close="closeModal" closeOutside>
-        <AddIncome :btnCancel="() => closeModal()" />
+      <MoblieModal
+        :showModal="showModalIncome"
+        @close="closeModalIncome"
+        closeOutside
+      >
+        <AddIncome :btnCancel="() => closeModalIncome()" />
+      </MoblieModal>
+      <MoblieModal
+        :showModal="showModalOutcome"
+        @close="closeModalOutcome"
+        closeOutside
+      >
+        <AddOutcome :btnCancel="() => closeModalOutcome()" />
       </MoblieModal>
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
     </template>
@@ -32,10 +43,10 @@ import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
-import NavMenu from "@/components/app/navMenu/Index.vue";
-import AddIncome from "@/components/app/formAddTransaction/AddIncome.vue";
-
 import MoblieModal from "@/components/app/modals/MoblieModal.vue";
+import AddIncome from "@/components/app/formAddTransaction/AddIncome.vue";
+import AddOutcome from "@/components/app/formAddTransaction/AddOutcome.vue";
+import NavMenu from "@/components/app/navMenu/Index.vue";
 
 export default {
   components: {
@@ -46,11 +57,13 @@ export default {
     NavigationTabs,
     NavMenu,
     AddIncome,
+    AddOutcome,
     MoblieModal,
   },
   data() {
     return {
-      showModalHome: false,
+      showModalIncome: false,
+      showModalOutcome: false,
       tabs: [
         {
           isActive: true,
@@ -73,12 +86,13 @@ export default {
           id: "2",
           icon: mdiCashPlus,
           label: "Ingreso",
-          click: this.closeModal,
+          click: this.closeModalIncome,
         },
         {
           id: "1",
           icon: mdiCashMinus,
           label: "Egreso",
+          click: this.closeModalOutcome,
         },
         {
           id: "4",
@@ -89,8 +103,11 @@ export default {
     };
   },
   methods: {
-    closeModal() {
-      this.showModalHome = !this.showModalHome;
+    closeModalIncome() {
+      this.showModalIncome = !this.showModalIncome;
+    },
+    closeModalOutcome() {
+      this.showModalOutcome = !this.showModalOutcome;
     },
   },
 };
