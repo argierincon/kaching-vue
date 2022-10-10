@@ -70,6 +70,7 @@ const closeOut = () => {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 
   @include mediumMobile {
+    min-width: 450px;
     width: fit-content;
   }
 }

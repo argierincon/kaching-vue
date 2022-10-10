@@ -69,6 +69,7 @@ const closeOut = () => {
   z-index: 1;
 
   @include tablet {
+    min-width: 450px;
     width: fit-content;
     height: fit-content;
     margin: auto;
