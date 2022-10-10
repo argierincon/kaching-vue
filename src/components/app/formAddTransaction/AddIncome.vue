@@ -6,6 +6,7 @@
       placeholder="Selecciona el tipo de ingreso"
       v-model="incomeType"
       required
+      hasMiniLabel
     >
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
@@ -21,6 +22,7 @@
       placeholder="Ingresa el monto"
       v-model="amount"
       required
+      hasMiniLabel
     />
     <v-textarea label="Descripción" v-model="description" />
 
@@ -44,17 +46,15 @@ const props = defineProps({
 
 const { btnCancel } = toRefs(props);
 
-const incomeType = ref(null);
+const form = ref("");
+const incomeType = ref("");
 const holder = ref("");
 const amount = ref(null);
 const description = ref("");
 
-const form = ref("");
-
 const submit = () => {
   btnCancel.value();
   form.value.reset();
-  console.log("SUBMIT");
 };
 </script>
 
