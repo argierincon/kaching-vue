@@ -1,15 +1,25 @@
 <template>
   <div class="field">
-    <label class="label">{{ label }}</label>
+    <label class="label"
+      >{{ label }}
+      <span
+        v-show="hasMiniLabel"
+        class="mini-label"
+        :class="miniLabelElems.class"
+      >
+        {{ miniLabelElems.label }}
+      </span>
+    </label>
     <div class="box-select">
       <select
-        :class="{ select: true, 'is-empty': isEmpty }"
+        class="select"
+        :class="{ 'is-empty': isEmpty }"
         v-model="localModel"
         :placeholder="placeholder"
         :required="required"
         :disabled="disabled"
       >
-        <option v-if="localModel === null" :value="null" disabled hidden>
+        <option v-if="localModel === ''" value="" disabled hidden>
           {{ placeholder }}
         </option>
         <slot />
@@ -23,9 +33,14 @@ export default {
   props: {
     modelValue: { type: String },
     label: { type: String, default: "Label" },
-    placeholder: { type: String, default: "Placeholder" },
+    hasMiniLabel: { type: Boolean, default: false },
+    miniLabelType: { type: String, default: "required" },
+    placeholder: { type: String, default: "placeholder" },
     required: { type: String, default: false },
     disabled: { type: String, default: false },
+  },
+  data() {
+    return {};
   },
   computed: {
     localModel: {
@@ -37,7 +52,12 @@ export default {
       },
     },
     isEmpty() {
-      return this.modelValue === null ? "is-empty" : "";
+      return this.modelValue === "" ? "is-empty" : "";
+    },
+    miniLabelElems() {
+      return this.miniLabelType === "required"
+        ? { class: "mini-label--required", label: "*" }
+        : { class: "mini-label--optional", label: "(Opcional)" };
     },
   },
 };
@@ -98,5 +118,26 @@ export default {
   &.is-empty {
     color: #b5b5b5;
   }
+}
+
+.is-danger {
+  &::after {
+    border: 3px solid #f14668;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 2px;
+  }
+
+  .select {
+    border-color: #f14668;
+  }
+}
+
+.msg-warning {
+  transition: all 0.3s ease;
+  display: block;
+  color: #f14668;
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
 }
 </style>
