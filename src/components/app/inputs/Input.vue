@@ -1,6 +1,15 @@
 <template>
   <div class="field">
-    <label class="label">{{ label }}</label>
+    <label class="label"
+      >{{ label }}
+      <span
+        v-show="hasMiniLabel"
+        class="mini-label"
+        :class="miniLabelElems.class"
+      >
+        {{ miniLabelElems.label }}
+      </span>
+    </label>
     <input
       class="input"
       v-model="localModel"
@@ -18,6 +27,8 @@ export default {
     type: { type: String, default: "text" },
     modelValue: { type: String, default: "" },
     label: { type: String, default: "Label" },
+    hasMiniLabel: { type: Boolean, default: false },
+    miniLabelType: { type: String, default: "required" },
     placeholder: { type: String, default: "Placeholder" },
     required: { type: String, default: false },
     disabled: { type: String, default: false },
@@ -31,8 +42,10 @@ export default {
         this.$emit("update:modelValue", newValue);
       },
     },
-    isEmpty() {
-      this.modelValue === null ? "is-empty" : "";
+    miniLabelElems() {
+      return this.miniLabelType === "required"
+        ? { class: "mini-label--required", label: "*" }
+        : { class: "mini-label--optional", label: "(Opcional)" };
     },
   },
 };
@@ -56,6 +69,18 @@ export default {
   &:disabled {
     @include inputs-disabled;
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .field.is-floating-in-label,
