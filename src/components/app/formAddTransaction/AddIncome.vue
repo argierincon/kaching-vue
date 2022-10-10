@@ -3,7 +3,7 @@
     <h4 class="form-add-transaction__title">Registrar Ingreso</h4>
     <v-select
       label="Tipo de ingreso"
-      placeholder="Selecciona el tipo de ingreso"
+      placeholder="Selecciona el tipo"
       v-model="incomeType"
       required
       hasMiniLabel
