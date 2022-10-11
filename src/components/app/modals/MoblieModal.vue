@@ -63,6 +63,7 @@ const closeOut = () => {
 
 .modal-content {
   @include positions;
+  height: calc(100% - 60px);
   padding: 2rem;
   position: fixed;
   background: $color-white;
@@ -88,6 +89,7 @@ const closeOut = () => {
   display: none;
 
   @include laptop {
+    transform: rotate(0deg);
     display: block;
     color: $color-black-light;
     position: absolute;
@@ -95,9 +97,11 @@ const closeOut = () => {
     right: 1rem;
     cursor: pointer;
     transition: color 0.4s ease;
+    transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
 
     &:hover {
-      transition: color 0.4s ease;
+      transform: rotate(270deg);
+      transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
       color: $color-black-blue;
     }
   }
@@ -137,7 +141,7 @@ const closeOut = () => {
   .modal-content {
     padding: 3rem;
     width: 100%;
-    height: auto;
+    height: calc(100% - 60px);
     overflow: auto;
   }
 
