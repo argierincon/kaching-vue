@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <Home />
+      <router-view />
     </template>
     <template #fallback>
       <SplashScreen />
