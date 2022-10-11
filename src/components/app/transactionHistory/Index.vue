@@ -6,6 +6,7 @@
       :type="item.transactionType"
       :title="item.transactionName"
       :amount="item.amount"
+      :description="item.description"
     />
   </section>
 </template>
