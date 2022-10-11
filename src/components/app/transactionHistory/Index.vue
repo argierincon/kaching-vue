@@ -1,17 +1,23 @@
 <template>
-  <section class="transaction-history">
-    <TransactionItem
-      v-for="item in movements"
-      :key="item.id"
-      :type="item.transactionType"
-      :title="item.transactionName"
-      :amount="item.amount"
-      :description="item.description"
-    />
-  </section>
+  <Layout>
+    <template #main-content>
+      <h4 class="title">Historial de transacciones</h4>
+      <section class="transaction-history">
+        <TransactionItem
+          v-for="item in movements"
+          :key="item.id"
+          :type="item.transactionType"
+          :title="item.transactionName"
+          :amount="item.amount"
+          :description="item.description"
+        />
+      </section>
+    </template>
+  </Layout>
 </template>
 
 <script setup>
+import Layout from "@/components/layouts/Default.vue";
 import TransactionItem from "@/components/app/transactionHistory/TransactionItem.vue";
 
 const movements = [
@@ -101,3 +107,17 @@ const movements = [
   },
 ];
 </script>
+
+<style lang="scss" scoped>
+.title {
+  margin: 0.5rem 0 2rem 0;
+  color: $color-primary;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+
+  @include tablet {
+    font-size: 1.2rem;
+  }
+}
+</style>
