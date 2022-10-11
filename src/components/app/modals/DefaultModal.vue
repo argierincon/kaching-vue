@@ -67,7 +67,8 @@ const closeOut = () => {
   height: fit-content;
   margin: auto;
   border-radius: 6px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  // box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 22px -3px #000;
   overflow: auto;
 
   @include medium-mobile {
