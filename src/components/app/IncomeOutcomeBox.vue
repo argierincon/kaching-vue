@@ -19,10 +19,17 @@ export default {};
 
   &__title {
     font-weight: 500;
+    @include laptop {
+      font-size: 1.1rem;
+    }
   }
 
   &__amount {
     font-weight: 400;
+
+    @include laptop {
+      font-size: 1.25rem;
+    }
   }
 }
 </style>

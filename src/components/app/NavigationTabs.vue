@@ -74,8 +74,12 @@ export default {
     li {
       padding: 0.5em 1em;
       text-align: center;
-      font-size: 14px;
+      font-size: 0.85rem;
       cursor: pointer;
+
+      @include laptop {
+        font-size: 0.95rem;
+      }
     }
 
     li.is-active {

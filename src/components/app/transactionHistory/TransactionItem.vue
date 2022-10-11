@@ -65,6 +65,10 @@ const currencyAmount = computed(() => currencyFormater.format(amount.value));
     p {
       font-weight: 500;
       font-size: 0.9rem;
+
+      @include laptop {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -75,6 +79,10 @@ const currencyAmount = computed(() => currencyFormater.format(amount.value));
       font-size: 0.8rem;
       font-weight: 300;
       color: $color-black-blue;
+
+      @include laptop {
+        font-size: 0.9rem;
+      }
     }
   }
 }

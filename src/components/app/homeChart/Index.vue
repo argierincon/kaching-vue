@@ -173,11 +173,19 @@ export default {
   color: $color-secondary;
   font-size: 2.25rem;
   font-weight: 600;
+
+  @include laptop {
+    font-size: 2.5rem;
+  }
 }
 
 .label-saved {
   color: $color-black-light;
   font-size: 0.8rem;
   text-align: center;
+
+  @include laptop {
+    font-size: 1rem;
+  }
 }
 </style>

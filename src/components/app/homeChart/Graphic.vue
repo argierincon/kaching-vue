@@ -112,6 +112,10 @@ const untap = () => {
     font-size: 0.9rem;
     color: $color-black-light;
     text-align: center;
+
+    @include laptop {
+      font-size: 1.1rem;
+    }
   }
 }
 </style>

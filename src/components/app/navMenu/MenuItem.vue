@@ -46,5 +46,9 @@ export default {
   font-size: 0.65rem;
   font-weight: 300;
   color: $color-black-light;
+
+  @include laptop {
+    font-size: 0.75rem;
+  }
 }
 </style>

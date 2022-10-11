@@ -62,6 +62,10 @@ const elemsItem =
   &__name,
   &__amount {
     font-size: 0.8rem;
+
+    @include laptop {
+      font-size: 1rem;
+    }
   }
 
   &__amount {
