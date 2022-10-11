@@ -1,7 +1,11 @@
 <template>
   <Suspense>
     <template #default>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </template>
     <template #fallback>
       <SplashScreen />
@@ -32,4 +36,14 @@ export default {
 <style>
 @import "./assets/scss/reset.scss";
 @import "./assets/scss/fonts.scss";
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease-out;
+}
 </style>
