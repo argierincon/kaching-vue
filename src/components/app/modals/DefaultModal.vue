@@ -112,4 +112,11 @@ const closeOut = () => {
 .pop-leave-active {
   transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.5s linear;
 }
+
+@media screen and (orientation: landscape) and (max-device-height: 767px) {
+  .modal-content {
+    height: calc(100% - 2rem);
+    overflow: auto;
+  }
+}
 </style>
