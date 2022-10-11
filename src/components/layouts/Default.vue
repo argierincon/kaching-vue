@@ -8,10 +8,6 @@
   </section>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style lang="scss" scoped>
 .default-layout {
   padding-bottom: 60px;
