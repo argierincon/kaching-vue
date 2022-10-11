@@ -11,32 +11,12 @@
         <IncomeOutcomeBox class="outcome" />
       </section>
 
-      <MoblieModal
-        :showModal="showModalIncome"
-        @close="closeModalIncome"
-        closeOutside
-      >
-        <AddIncome :btnCancel="() => closeModalIncome()" />
-      </MoblieModal>
-      <MoblieModal
-        :showModal="showModalOutcome"
-        @close="closeModalOutcome"
-        closeOutside
-      >
-        <AddOutcome :btnCancel="() => closeModalOutcome()" />
-      </MoblieModal>
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
-    </template>
-
-    <template #nav-menu>
-      <NavMenu :optionsMenu="optMenu" />
     </template>
   </Layout>
 </template>
 
 <script>
-import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
-
 import Layout from "@/components/layouts/Default.vue";
 import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
@@ -44,11 +24,6 @@ import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
-import MoblieModal from "@/components/app/modals/MoblieModal.vue";
-import AddIncome from "@/components/app/formAddTransaction/AddIncome.vue";
-import AddOutcome from "@/components/app/formAddTransaction/AddOutcome.vue";
-import NavMenu from "@/components/app/navMenu/Index.vue";
-import TransactionHistory from "@/components/app/transactionHistory/Index.vue";
 
 export default {
   components: {
@@ -57,16 +32,9 @@ export default {
     BalanceBox,
     IncomeOutcomeBox,
     NavigationTabs,
-    NavMenu,
-    AddIncome,
-    AddOutcome,
-    MoblieModal,
-    TransactionHistory,
   },
   data() {
     return {
-      showModalIncome: false,
-      showModalOutcome: false,
       tabs: [
         {
           isActive: true,
@@ -79,39 +47,7 @@ export default {
           component: RecentTransactionsSection,
         },
       ],
-      optMenu: [
-        {
-          id: "1",
-          icon: mdiHome,
-          label: "Inicio",
-        },
-        {
-          id: "2",
-          icon: mdiCashPlus,
-          label: "Ingreso",
-          click: this.closeModalIncome,
-        },
-        {
-          id: "1",
-          icon: mdiCashMinus,
-          label: "Egreso",
-          click: this.closeModalOutcome,
-        },
-        {
-          id: "4",
-          icon: mdiCashClock,
-          label: "Historial",
-        },
-      ],
     };
-  },
-  methods: {
-    closeModalIncome() {
-      this.showModalIncome = !this.showModalIncome;
-    },
-    closeModalOutcome() {
-      this.showModalOutcome = !this.showModalOutcome;
-    },
   },
 };
 </script>
