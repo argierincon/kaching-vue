@@ -52,7 +52,7 @@ const closeOut = () => {
 .modal-overlay {
   background-color: transparent;
 
-  @include tablet {
+  @include laptop {
     @include positions;
     cursor: pointer;
     z-index: 1;
@@ -69,6 +69,11 @@ const closeOut = () => {
   z-index: 1;
 
   @include tablet {
+    padding: 3rem;
+  }
+
+  @include laptop {
+    padding: 2rem;
     min-width: 450px;
     width: fit-content;
     height: fit-content;
@@ -82,7 +87,7 @@ const closeOut = () => {
 .close-icon {
   display: none;
 
-  @include tablet {
+  @include laptop {
     display: block;
     color: $color-black-light;
     position: absolute;
@@ -113,7 +118,7 @@ const closeOut = () => {
 .pop-leave-to {
   transform: scale(1) translateX(100%);
 
-  @include tablet {
+  @include laptop {
     opacity: 0;
     transform: scale(0.3) translateY(-50%);
   }
@@ -123,8 +128,23 @@ const closeOut = () => {
 .pop-leave-active {
   transition: transform 0.4s cubic-bezier(0.5, 0, 0, 0);
 
-  @include tablet {
+  @include laptop {
     transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.5s linear;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-device-width: 1023px) {
+  .modal-content {
+    padding: 3rem;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+  }
+
+  .pop-enter-from,
+  .pop-leave-to {
+    opacity: 1;
+    transform: scale(1) translateX(100%);
   }
 }
 </style>
