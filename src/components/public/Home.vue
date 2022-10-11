@@ -5,7 +5,6 @@
     </template>
 
     <template #main-content>
-      <TransactionHistory />
       <section class="home-grid">
         <BalanceBox class="balance" />
         <IncomeOutcomeBox class="income" />
