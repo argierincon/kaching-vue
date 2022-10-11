@@ -5,11 +5,13 @@
     </template>
 
     <template #main-content>
+      <TransactionHistory />
       <section class="home-grid">
         <BalanceBox class="balance" />
         <IncomeOutcomeBox class="income" />
         <IncomeOutcomeBox class="outcome" />
       </section>
+
       <MoblieModal
         :showModal="showModalIncome"
         @close="closeModalIncome"
@@ -47,6 +49,7 @@ import MoblieModal from "@/components/app/modals/MoblieModal.vue";
 import AddIncome from "@/components/app/formAddTransaction/AddIncome.vue";
 import AddOutcome from "@/components/app/formAddTransaction/AddOutcome.vue";
 import NavMenu from "@/components/app/navMenu/Index.vue";
+import TransactionHistory from "@/components/app/transactionHistory/Index.vue";
 
 export default {
   components: {
@@ -59,6 +62,7 @@ export default {
     AddIncome,
     AddOutcome,
     MoblieModal,
+    TransactionHistory,
   },
   data() {
     return {
