@@ -19,13 +19,13 @@ export default {
           id: "2",
           icon: mdiCashPlus,
           label: "Ingreso",
-          click: this.closeModalIncome,
+          click: this.openModalIncome,
         },
         {
           id: "1",
           icon: mdiCashMinus,
           label: "Egreso",
-          click: this.closeModalOutcome,
+          click: this.openModalOutcome,
         },
         {
           id: "4",
@@ -40,19 +40,21 @@ export default {
   methods: {
     routerHome() {
       this.$router.push("/");
-      console.log("HOLI");
+    },
+    openModalIncome() {
+      this.showModalIncome = true;
     },
     closeModalIncome() {
-      this.showModalIncome = !this.showModalIncome;
-      // this.$router.push("/añadir-ingreso");
+      this.showModalIncome = false;
+    },
+    openModalOutcome() {
+      this.showModalOutcome = true;
     },
     closeModalOutcome() {
-      this.showModalOutcome = !this.showModalOutcome;
-      // this.$router.push("/añadir-egreso");
+      this.showModalOutcome = false;
     },
     routerHistory() {
       this.$router.push("/historial-de-transacciones");
-      console.log("JJJJJ");
     },
   },
 };
