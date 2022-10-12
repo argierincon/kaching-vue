@@ -2,6 +2,7 @@
   <form @submit.prevent="submit" ref="form" class="form-add-transaction">
     <Loader v-if="isLoading" />
     <h4 class="form-add-transaction__title">Registrar Ingreso</h4>
+
     <v-select
       label="Tipo de ingreso"
       placeholder="Selecciona el tipo"
@@ -12,11 +13,15 @@
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
     </v-select>
+
     <v-input
-      label="Titular"
-      placeholder="Ingresa el titular"
-      v-model="holder"
+      label="Nombre del ingreso"
+      placeholder="Ingresa el nombre"
+      v-model="incomeName"
+      required
+      hasMiniLabel
     />
+
     <v-input
       type="number"
       label="Monto"
@@ -25,6 +30,13 @@
       required
       hasMiniLabel
     />
+
+    <v-input
+      label="Titular"
+      placeholder="Ingresa el titular"
+      v-model="holder"
+    />
+
     <v-textarea label="Descripción" v-model="description" />
 
     <div class="form-add-transaction__buttons">
@@ -55,12 +67,14 @@ const { btnCancel } = toRefs(props);
 let isLoading = ref(false);
 const form = ref("");
 const incomeType = ref("");
+const incomeName = ref("");
 const holder = ref("");
 const amount = ref(null);
 const description = ref("");
 
 const dataObj = reactive({
   type: incomeType,
+  name: incomeName,
   holder: holder,
   amount: amount,
   description: description,
