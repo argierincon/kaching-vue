@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submit" ref="form" class="form-add-transaction">
+    <Loader v-if="isLoading" />
     <h4 class="form-add-transaction__title">Registrar Ingreso</h4>
     <v-select
       label="Tipo de ingreso"
@@ -34,25 +35,45 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref } from "vue";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { defineProps, toRefs, ref, reactive } from "vue";
+
+import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
 import vInput from "@/components/app/inputs/Input.vue";
 import vSelect from "@/components/app/inputs/Select.vue";
 import vTextarea from "@/components/app/inputs/Textarea.vue";
 
+const db = getFirestore();
+const colRef = collection(db, "incomes");
+
 const props = defineProps({
-  btnCancel: { type: Function, default: () => console.log("PRUEB") },
+  btnCancel: { type: Function },
 });
 
 const { btnCancel } = toRefs(props);
 
+let isLoading = ref(false);
 const form = ref("");
 const incomeType = ref("");
 const holder = ref("");
 const amount = ref(null);
 const description = ref("");
 
-const submit = () => {
+const dataObj = reactive({
+  type: incomeType,
+  holder: holder,
+  amount: amount,
+  description: description,
+});
+
+const submit = async () => {
+  isLoading.value = true;
+  const docRef = await addDoc(colRef, Object.assign({}, dataObj));
+  isLoading.value = false;
+
+  console.log("Document was created with ID:", docRef.id);
+
   btnCancel.value();
   form.value.reset();
 };
