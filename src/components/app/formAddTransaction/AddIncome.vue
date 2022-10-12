@@ -50,7 +50,6 @@ const colRef = collection(db, "incomes");
 const props = defineProps({
   btnCancel: { type: Function },
 });
-
 const { btnCancel } = toRefs(props);
 
 let isLoading = ref(false);
