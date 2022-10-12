@@ -6,6 +6,7 @@
       :label="item.label"
       :icon="item.icon"
       :onClick="item.click"
+      :isActive="item.isActive"
     />
   </nav>
 </template>
