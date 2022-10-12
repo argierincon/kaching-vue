@@ -13,6 +13,7 @@
       <option class="option" value="Efectivo">Efectivo</option>
       <option class="option" value="Tarjeta">Tarjeta</option>
     </v-select>
+
     <v-input
       label="Nombre del gasto"
       placeholder="Ingresa el nombre"
@@ -20,6 +21,7 @@
       required
       hasMiniLabel
     />
+
     <v-input
       type="number"
       label="Monto"
@@ -28,6 +30,7 @@
       required
       hasMiniLabel
     />
+
     <v-textarea label="Descripción" v-model="description" />
 
     <div class="form-add-transaction__buttons">
