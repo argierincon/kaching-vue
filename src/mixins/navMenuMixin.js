@@ -28,7 +28,7 @@ export default {
         {
           id: "3",
           icon: mdiCashMinus,
-          label: "Egreso",
+          label: "Gasto",
           click: this.openModalOutcome,
         },
         {

@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="submit" ref="form" class="form-add-transaction">
-    <h4 class="form-add-transaction__title">Registrar Egreso</h4>
+    <h4 class="form-add-transaction__title">Registrar gasto</h4>
     <v-select
-      label="Tipo de egreso"
+      label="Tipo de gasto"
       placeholder="Selecciona el tipo"
       v-model="incomeType"
       required
