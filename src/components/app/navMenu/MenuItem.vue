@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item" @click="onClick">
+  <div class="menu-item" :class="{ active: isActive }" @click="onClick">
     <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
     <p class="label">{{ label }}</p>
   </div>
@@ -17,6 +17,7 @@ export default {
     icon: { type: String, default: mdiBell },
     label: { type: String, default: "HOME" },
     onClick: { type: Function, required: true },
+    isActive: { type: Boolean, default: false },
   },
 };
 </script>
@@ -34,6 +35,13 @@ export default {
     .icon {
       color: $color-primary;
       transition: all 0.4s ease;
+    }
+  }
+
+  &.active {
+    .label,
+    .icon {
+      color: $color-primary;
     }
   }
 }
