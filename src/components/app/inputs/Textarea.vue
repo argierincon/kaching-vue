@@ -13,25 +13,10 @@
 </template>
 
 <script>
+import inputsMixin from "@/mixins/inputsMixin.js";
+
 export default {
-  props: {
-    type: { type: String, default: "text" },
-    modelValue: { type: String, default: "" },
-    label: { type: String, default: "Label" },
-    placeholder: { type: String, default: "Placeholder" },
-    required: { type: String, default: false },
-    disabled: { type: String, default: false },
-  },
-  computed: {
-    localModel: {
-      get() {
-        return this.modelValue;
-      },
-      set(newValue) {
-        this.$emit("update:modelValue", newValue);
-      },
-    },
-  },
+  mixins: [inputsMixin],
 };
 </script>
 
