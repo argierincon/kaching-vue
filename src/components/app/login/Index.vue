@@ -8,7 +8,7 @@
           src="@/assets/images/login-kaching-logo.png"
           alt="Logo k4ch1ng!"
         />
-        <Btn btnType="outline-primary" label="Inicia sesión con google">
+        <Btn btnType="outline-primary" label="Iniciar sesión con google">
           <template #img-left>
             <img
               class="img-icon"
