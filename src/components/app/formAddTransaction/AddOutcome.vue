@@ -14,6 +14,47 @@
       <option class="option" value="Tarjeta">Tarjeta</option>
     </v-select>
 
+    <v-select
+      label="Categoría"
+      placeholder="Selecciona el tipo"
+      v-model="outcomeCategory"
+      required
+      hasMiniLabel
+    >
+      <option class="option" value="Arrendamiento">Arrendamiento</option>
+      <option class="option" value="Víveres">Víveres</option>
+      <option class="option" value="Comida">Restaurantes y hoteles</option>
+      <option class="option" value="Transporte">Transporte</option>
+      <option class="option" value="Servicios basicos">
+        Servicios basicos
+      </option>
+      <option class="option" value="Servicios generales">
+        Servicios generales
+      </option>
+      <option class="option" value="Imprevistos">Imprevistos</option>
+      <option class="option" value="Ropa">Ropa y calzado</option>
+      <option class="option" value="Decoración">Decoración hogar</option>
+      <option class="option" value="Cuidado personal">Cuidado personal</option>
+      <option class="option" value="Artículos de deporte">
+        Artículos de deporte
+      </option>
+      <option class="option" value="Medicina y salud">Medicina y salud</option>
+      <option class="option" value="Telecomunicaciones">
+        Telecomunicaciones
+      </option>
+      <option class="option" value="Educación">Educación</option>
+      <option class="option" value="Ahorro">Ahorro</option>
+      <option class="option" value="Cuota TDC">Cuota TDC</option>
+      <option class="option" value="Reparaciones">Reparaciones</option>
+      <option class="option" value="Entretenimiento y ocio">
+        Entretenimiento y ocio
+      </option>
+      <option class="option" value="Cuidado del hogar">
+        Reparaciones y cuidado del hogar
+      </option>
+      <option class="option" value="Remesas">Remesas</option>
+    </v-select>
+
     <v-input
       label="Nombre del gasto"
       placeholder="Ingresa el nombre"
@@ -61,12 +102,14 @@ const { btnCancel } = toRefs(props);
 let isLoading = ref(false);
 const form = ref("");
 const outcomeType = ref("");
+const outcomeCategory = ref("");
 const outcomeName = ref("");
 const amount = ref(null);
 const description = ref("");
 
 const dataObj = reactive({
   type: outcomeType,
+  category: outcomeCategory,
   name: outcomeName,
   amount: amount,
   description: description,
