@@ -11,7 +11,7 @@
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.0.96",
     "core-js": "^3.6.5",
-    "firebase": "^9.12.0",
+    "firebase": "^9.12.1",
     "node-sass": "^7.0.3",
     "vue": "^3.0.0",
     "vue-router": "^4.1.5"
