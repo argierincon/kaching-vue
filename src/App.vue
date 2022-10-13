@@ -2,7 +2,7 @@
   <Suspense>
     <template #default>
       <router-view v-slot="{ Component }">
-        <transition name="slide">
+        <transition name="fade">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -37,13 +37,13 @@ export default {
 @import "./assets/scss/reset.scss";
 @import "./assets/scss/fonts.scss";
 
-.slide-enter-from,
-.slide-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-.slide-enter-active,
-.slide-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.5s ease-out;
 }
 </style>
