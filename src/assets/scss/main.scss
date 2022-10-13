@@ -1,4 +1,23 @@
 @import "../scss/colors.scss";
 @import "../scss/responsiveMixins.scss";
 @import "../scss/mixins.scss";
-@import "../scss/inputs.scss"
+@import "../scss/inputs.scss";
+
+// btn styles
+.img-icon {
+  width: 1.5rem;
+
+  @include tablet {
+    width: 2rem;
+  }
+}
+
+.outline-primary:hover,
+.outline-secondary:hover {
+  transition: 0.3s linear 0s;
+
+  .img-icon {
+    transition: 0.3s linear 0s;
+    filter: brightness(5) !important;
+  }
+}
