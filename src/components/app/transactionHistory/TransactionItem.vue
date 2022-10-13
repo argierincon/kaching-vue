@@ -113,6 +113,7 @@ const currencyAmount = computed(() => currencyFormater.format(amount.value));
   overflow: hidden;
   white-space: nowrap;
 }
+
 .transaction-amount {
   margin-left: auto;
 }
