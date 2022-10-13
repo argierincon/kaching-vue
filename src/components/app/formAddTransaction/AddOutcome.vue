@@ -11,7 +11,8 @@
     >
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
-      <option class="option" value="Tarjeta">Tarjeta</option>
+      <option class="option" value="Tarjeta">Tarjeta de débito</option>
+      <option class="option" value="Tarjeta">Tarjeta de crédito</option>
     </v-select>
 
     <v-select
