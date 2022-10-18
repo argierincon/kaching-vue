@@ -8,7 +8,11 @@
           src="@/assets/images/login-kaching-logo.png"
           alt="Logo k4ch1ng!"
         />
-        <Btn btnType="outline-primary" label="Iniciar sesión con google">
+        <Btn
+          btnType="outline-primary"
+          label="Iniciar sesión con google"
+          :onClick="googleSignIn"
+        >
           <template #img-left>
             <img
               class="img-icon"
@@ -23,7 +27,41 @@
 </template>
 
 <script setup>
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 import Btn from "@/components/public/Btn.vue";
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+
+const googleSignIn = () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result, "result");
+      // const user = result.user;
+      // console.log(result.user.displayName)
+      this.user = result.user.displayName;
+      this.isSignedIn = true;
+    })
+    .catch((error) => {
+      console.log(error, "error");
+    });
+};
+
+// const googleSignOut = () => {
+//   signOut(auth)
+//     .then(() => {
+//       this.user = "";
+//       this.isSignedIn = false;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 </script>
 
 <style lang="scss" scoped>
@@ -51,7 +89,7 @@ import Btn from "@/components/public/Btn.vue";
   }
 
   &::before {
-    content: url("../../../assets/svg/mid-circle-shape-purple.svg");
+    content: url("../assets/svg/mid-circle-shape-purple.svg");
     position: absolute;
     top: 18%;
     left: 0;
@@ -64,7 +102,7 @@ import Btn from "@/components/public/Btn.vue";
   }
 
   &::after {
-    content: url("../../../assets/svg/waves-shape-blue.svg");
+    content: url("../assets/svg/waves-shape-blue.svg");
     margin-top: 4%;
     position: absolute;
     width: 80px;
@@ -97,7 +135,7 @@ import Btn from "@/components/public/Btn.vue";
 
 .circle {
   &::before {
-    content: url("../../../assets/svg/circle-shape-gradient.svg");
+    content: url("../assets/svg/circle-shape-gradient.svg");
     position: absolute;
     width: 48px;
     top: 4%;
