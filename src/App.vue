@@ -24,7 +24,7 @@ export default {
       () =>
         new Promise((resolve) => {
           setTimeout(() => {
-            resolve(require("./components/public/Home.vue"));
+            resolve(require("./views/Home.vue"));
           }, 1000);
         })
     ),
