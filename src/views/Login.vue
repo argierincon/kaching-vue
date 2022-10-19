@@ -8,60 +8,58 @@
           src="@/assets/images/login-kaching-logo.png"
           alt="Logo k4ch1ng!"
         />
-        <Btn
-          btnType="outline-primary"
-          label="Iniciar sesión con google"
-          :onClick="googleSignIn"
-        >
-          <template #img-left>
-            <img
-              class="img-icon"
-              src="@/assets/images/logo-google.png"
-              alt="Logo google"
-            />
-          </template>
-        </Btn>
+
+        <div>
+          <Btn
+            btnType="outline-primary"
+            label="Iniciar sesión con google"
+            :onClick="googleSignIn"
+          >
+            <template #img-left>
+              <img
+                class="img-icon"
+                src="@/assets/images/logo-google.png"
+                alt="Logo google"
+              />
+            </template>
+          </Btn>
+          <p class="sign-in-error" v-if="tokenHasFailed">
+            😓 Ha ocurido un error al intentar iniciar sesión <br />
+            por favor vuelve a intentarlo.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-} from "firebase/auth";
+import { ref } from "vue";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Btn from "@/components/public/Btn.vue";
+import router from "@/router/index";
+import { verifyToken } from "@/jwt";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
-const googleSignIn = () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result, "result");
-      // const user = result.user;
-      // console.log(result.user.displayName)
-      this.user = result.user.displayName;
-      this.isSignedIn = true;
-    })
-    .catch((error) => {
-      console.log(error, "error");
-    });
-};
+let tokenHasFailed = ref(false);
 
-// const googleSignOut = () => {
-//   signOut(auth)
-//     .then(() => {
-//       this.user = "";
-//       this.isSignedIn = false;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
+const googleSignIn = async () => {
+  try {
+    const { user } = await signInWithPopup(auth, provider);
+
+    const { user_id } = verifyToken(user.accessToken);
+    if (user_id === user.uid) {
+      localStorage.setItem("accessToken", user.accessToken);
+      router.push("/");
+    } else {
+      tokenHasFailed.value = true;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -145,5 +143,12 @@ const googleSignIn = () => {
       width: 68px;
     }
   }
+}
+
+.sign-in-error {
+  margin-top: 0.55rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: $color-red;
 }
 </style>
