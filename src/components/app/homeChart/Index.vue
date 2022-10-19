@@ -118,7 +118,7 @@ export default {
         return m.date > lastDays;
       });
 
-      return last30Days.map((m, i) => {
+      return last30Days.map((_, i) => {
         const lastMovements = last30Days.slice(0, i + 1);
 
         return lastMovements.reduce((suma, current) => {
