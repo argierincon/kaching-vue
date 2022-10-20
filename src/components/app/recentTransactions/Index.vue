@@ -1,6 +1,10 @@
 <template>
   <section class="recent-ransaction-section">
     <RecentTransactionItem
+      v-if="!movements.length"
+      transactionName="No hay transacciones recientes."
+    />
+    <RecentTransactionItem
       v-for="item in movements"
       :key="item.id"
       :transactionName="item.transactionName"
@@ -11,9 +15,10 @@
 </template>
 
 <script setup>
+import { reactive } from "vue";
 import RecentTransactionItem from "@/components/app/recentTransactions/RecentTransactionItem.vue";
 
-const movements = [
+const movements = reactive([
   {
     id: 1,
     date: new Date("10-02-2022"),
@@ -98,7 +103,7 @@ const movements = [
     transactionName: "Venezuela",
     amount: -250.0,
   },
-];
+]);
 </script>
 
 <style lang="scss" scoped>
