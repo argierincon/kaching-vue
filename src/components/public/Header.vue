@@ -58,7 +58,7 @@ header {
   // box-shadow: 0px 1px 2px rgba(85, 85, 85, 0.2);
 
   @include laptop {
-    padding: 1rem;
+    padding: 1rem 3rem;
     width: calc(100% - 80px);
     position: fixed;
     left: 80px;
