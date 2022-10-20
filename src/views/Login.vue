@@ -23,7 +23,7 @@
               />
             </template>
           </Btn>
-          <p class="sign-in-error" v-if="tokenHasFailed">
+          <p class="sign-in-error" v-show="tokenHasFailed">
             😓 Ha ocurido un error al intentar iniciar sesión <br />
             por favor vuelve a intentarlo.
           </p>
@@ -35,7 +35,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  signInWithRedirect,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import Btn from "@/components/public/Btn.vue";
 import router from "@/router/index";
 import { verifyToken } from "@/jwt";
@@ -53,6 +58,7 @@ const googleSignIn = async () => {
     if (user_id === user.uid) {
       localStorage.setItem("accessToken", user.accessToken);
       localStorage.setItem("uid", user.uid);
+      localStorage.setItem("name", user.displayName);
       router.push("/");
     } else {
       tokenHasFailed.value = true;
