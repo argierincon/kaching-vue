@@ -37,21 +37,24 @@ export default {
 <style lang="scss" scoped>
 .nav-menu {
   min-height: 60px;
-  padding: 0.5rem;
   width: 100%;
-  background: $bg-color-violet;
+  padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
   position: fixed;
   bottom: 0;
-  gap: 0.5rem;
+  background: $bg-color-violet;
 
   @include laptop {
-    padding-top: 4rem;
+    padding-top: 6rem;
+    height: 100%;
+    width: 80px;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    position: inherit;
+    gap: 6rem;
+    position: fixed;
+    top: 0;
   }
 }
 </style>
