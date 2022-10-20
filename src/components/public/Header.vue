@@ -49,15 +49,18 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  padding: 1.5rem 1.5rem 0;
+  width: 100%;
+  padding: 1rem;
   gap: 1rem;
   display: grid;
   grid-template-columns: 80px 1fr 30px;
   align-items: center;
-  grid-area: A;
 
   @include laptop {
-    padding: 3rem 3rem 0;
+    width: calc(100% - 80px);
+    position: fixed;
+    left: 80px;
+    background: $bg-color-app;
   }
 }
 
