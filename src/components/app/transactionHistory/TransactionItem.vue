@@ -3,12 +3,12 @@
     <button v-show="amount" class="ellipsis-icon">
       <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
     </button>
-    <div v-show="title" class="item-transaction__header">
+    <div v-show="amount" class="item-transaction__header">
       <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
       <p class="transaction-title">{{ title }}</p>
       <p class="transaction-amount">{{ currencyAmount }}</p>
     </div>
-    <div v-if="!title" class="content-default">
+    <div v-if="!amount" class="content-default">
       <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
       <p>{{ description }}</p>
     </div>
