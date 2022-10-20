@@ -107,6 +107,7 @@ const outcomeCategory = ref("");
 const outcomeName = ref("");
 const amount = ref(null);
 const description = ref("");
+const uid = localStorage.getItem("uid");
 
 const dataObj = reactive({
   type: outcomeType,
@@ -114,6 +115,7 @@ const dataObj = reactive({
   name: outcomeName,
   amount: amount,
   description: description,
+  uid,
 });
 
 const submit = async () => {

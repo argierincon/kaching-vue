@@ -72,12 +72,15 @@ const holder = ref("");
 const amount = ref(null);
 const description = ref("");
 
+const uid = localStorage.getItem("uid");
+
 const dataObj = reactive({
   type: incomeType,
   name: incomeName,
   holder: holder,
   amount: amount,
   description: description,
+  uid,
 });
 
 const submit = async () => {
