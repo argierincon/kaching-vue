@@ -76,9 +76,15 @@ export default {
       text-align: center;
       font-size: 0.85rem;
       cursor: pointer;
+      transition: color 0.3s ease;
 
       @include laptop {
         font-size: 0.95rem;
+      }
+
+      &:hover {
+        color: $color-primary;
+        transition: color 0.3s ease;
       }
     }
 
