@@ -122,7 +122,18 @@ const movements = reactive([
   font-weight: 600;
 
   @include tablet {
+    margin: 1rem 0 3rem 0;
     font-size: 1.2rem;
+  }
+}
+
+.transaction-history {
+  @include laptop {
+    height: calc(100vh - 160px);
+    max-width: 70%;
+    padding: 2px;
+    margin: auto;
+    overflow-y: auto;
   }
 }
 </style>
