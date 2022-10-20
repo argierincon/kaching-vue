@@ -55,8 +55,10 @@ header {
   display: grid;
   grid-template-columns: 80px 1fr 30px;
   align-items: center;
+  box-shadow: 0px 1px 2px rgba(85, 85, 85, 0.2);
 
   @include laptop {
+    padding: 1rem;
     width: calc(100% - 80px);
     position: fixed;
     left: 80px;
