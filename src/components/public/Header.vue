@@ -54,8 +54,10 @@ header {
   display: grid;
   grid-template-columns: 80px 1fr 30px;
   align-items: center;
+  grid-area: A;
 
-  @include tablet {
+  @include laptop {
+    padding: 3rem 3rem 0;
   }
 }
 
