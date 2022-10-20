@@ -18,7 +18,7 @@
     >
       <AddOutcome :btnCancel="() => closeModalOutcome()" />
     </MoblieModal>
-    <NavMenu :optionsMenu="optMenu" />
+    <NavMenu :optionsMenu="optMenu" class="layout-menu" />
   </section>
 </template>
 
@@ -37,10 +37,29 @@ export default {
 .default-layout {
   width: 100%;
   padding-bottom: 60px;
-  position: absolute;
+  // position: absolute;
+
+  @include laptop {
+    padding: 0;
+    display: grid;
+    grid-template-areas:
+      "B A A A"
+      "B C C C"
+      "B C C C";
+    grid-template-columns: 80px 1fr;
+  }
 
   main {
     padding: 2rem 1.5rem;
+
+    @include laptop {
+      grid-area: C;
+      padding: 3rem;
+    }
   }
+}
+
+.layout-menu {
+  grid-area: B;
 }
 </style>
