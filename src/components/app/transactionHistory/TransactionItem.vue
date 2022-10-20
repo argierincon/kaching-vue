@@ -1,22 +1,19 @@
 <template>
   <article class="item-transaction" :class="type">
-    <button class="ellipsis-icon">
+    <button v-show="amount" class="ellipsis-icon">
       <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
     </button>
-    <div class="item-transaction__header">
-      <svg-icon
-        class="close-icon"
-        type="mdi"
-        size="20"
-        :path="mdiFood"
-      ></svg-icon>
+    <div v-show="title" class="item-transaction__header">
+      <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
       <p class="transaction-title">{{ title }}</p>
       <p class="transaction-amount">{{ currencyAmount }}</p>
     </div>
-    <div v-show="description" class="item-transaction__content">
-      <p>
-        {{ description }}
-      </p>
+    <div v-if="!title" class="content-default">
+      <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
+      <p>{{ description }}</p>
+    </div>
+    <div v-else class="item-transaction__content">
+      <p>{{ description }}</p>
     </div>
   </article>
 </template>
@@ -24,7 +21,7 @@
 <script setup>
 import { defineProps, toRefs, computed } from "vue";
 import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiFood, mdiDotsVertical } from "@mdi/js";
+import { mdiDotsVertical, mdiMagnify } from "@mdi/js";
 
 import { currencyFormater } from "/utils/currencyFormater";
 
@@ -85,6 +82,11 @@ const currencyAmount = computed(() => currencyFormater.format(amount.value));
       }
     }
   }
+}
+
+.content-default {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .outcome {
