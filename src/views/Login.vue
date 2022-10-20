@@ -52,6 +52,7 @@ const googleSignIn = async () => {
     const { user_id } = verifyToken(user.accessToken);
     if (user_id === user.uid) {
       localStorage.setItem("accessToken", user.accessToken);
+      localStorage.setItem("uid", user.uid);
       router.push("/");
     } else {
       tokenHasFailed.value = true;
