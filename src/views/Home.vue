@@ -7,8 +7,8 @@
     <template #main-content>
       <section class="home-grid">
         <BalanceBox class="balance" />
-        <IncomeOutcomeBox class="income" />
-        <IncomeOutcomeBox class="outcome" />
+        <IncomeOutcomeBox class="income" label="Ingresos" />
+        <IncomeOutcomeBox class="outcome" label="Gastos" />
       </section>
 
       <NavigationTabs class="nav-tabs" :tabs="tabs" />
@@ -24,6 +24,13 @@ import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
+import {
+  collection,
+  getFirestore,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 export default {
   components: {
@@ -48,6 +55,23 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.test();
+    const name = localStorage.getItem("name");
+    console.log(name);
+  },
+  methods: {
+    async test() {
+      const uid = localStorage.getItem("uid");
+      const db = getFirestore();
+      const q = query(collection(db, "incomes"), where("uid", "==", uid));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+    },
   },
 };
 </script>
