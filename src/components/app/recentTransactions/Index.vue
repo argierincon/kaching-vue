@@ -1,7 +1,7 @@
 <template>
   <section class="recent-ransaction-section">
     <RecentTransactionItem
-      v-if="!movements.length"
+      v-show="!movements.length"
       transactionName="No hay transacciones recientes."
     />
     <RecentTransactionItem
