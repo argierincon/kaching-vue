@@ -115,21 +115,20 @@ const movements = reactive([
 
 <style lang="scss" scoped>
 .title {
-  margin: 0.5rem 0 2rem 0;
+  margin-bottom: 2rem;
   color: $color-primary;
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
 
   @include tablet {
-    margin: 1rem 0 3rem 0;
     font-size: 1.2rem;
   }
 }
 
 .transaction-history {
   @include laptop {
-    height: calc(100vh - 160px);
+    height: calc(100vh - 240px);
     max-width: 70%;
     padding: 2px;
     margin: auto;
