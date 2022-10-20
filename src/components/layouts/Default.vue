@@ -1,6 +1,7 @@
 <template>
   <section class="default-layout">
-    <slot name="header"></slot>
+    <Header />
+
     <main>
       <slot name="main-content"></slot>
     </main>
@@ -23,13 +24,14 @@
 </template>
 
 <script>
+import Header from "@/components/public/Header.vue";
 import NavMenu from "@/components/app/navMenu/Index.vue";
 import menuElemsMixin from "@/mixins/navMenuMixin.js";
 
 export default {
   name: "navMenu",
   mixins: [menuElemsMixin],
-  components: { NavMenu },
+  components: { Header, NavMenu },
 };
 </script>
 
@@ -37,29 +39,18 @@ export default {
 .default-layout {
   width: 100%;
   padding-bottom: 60px;
-  // position: absolute;
+  position: absolute;
 
   @include laptop {
-    padding: 0;
-    display: grid;
-    grid-template-areas:
-      "B A A A"
-      "B C C C"
-      "B C C C";
-    grid-template-columns: 80px 1fr;
+    padding-bottom: 0;
   }
 
   main {
     padding: 2rem 1.5rem;
 
     @include laptop {
-      grid-area: C;
-      padding: 3rem;
+      padding: 146px 1.5rem 1.5rem 104px;
     }
   }
-}
-
-.layout-menu {
-  grid-area: B;
 }
 </style>
