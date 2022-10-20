@@ -7,7 +7,7 @@
       :size="18"
     ></svg-icon>
     <p class="box-transaction__name">{{ transactionName }}</p>
-    <p v-if="amount" class="box-transaction__amount">{{ currencyAmount }}</p>
+    <p v-show="amount" class="box-transaction__amount">{{ currencyAmount }}</p>
   </div>
 </template>
 
@@ -16,10 +16,6 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiArrowTopRight, mdiArrowBottomRight, mdiMagnify } from "@mdi/js";
 import { defineProps, toRefs, reactive, computed } from "vue";
 import { currencyFormater } from "/utils/currencyFormater";
-
-const iconIncome = mdiArrowTopRight;
-const iconOutcome = mdiArrowBottomRight;
-const iconMagnify = mdiMagnify;
 
 const props = defineProps({
   transactionName: {
@@ -35,28 +31,28 @@ const { name, amount, transactionType } = toRefs(props);
 const currencyAmount = computed(() => currencyFormater.format(amount.value));
 let elemsItem = reactive({
   class: "",
-  icon: iconIncome,
+  icon: mdiMagnify,
 });
 
 switch (transactionType.value) {
   case "income":
     elemsItem = {
       class: "income",
-      icon: iconIncome,
+      icon: mdiArrowTopRight,
     };
     break;
 
   case "outcome":
     elemsItem = {
       class: "outcome",
-      icon: iconOutcome,
+      icon: mdiArrowBottomRight,
     };
     break;
 
   default:
     elemsItem = {
       class: "",
-      icon: iconMagnify,
+      icon: mdiMagnify,
     };
     break;
 }
