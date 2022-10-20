@@ -45,5 +45,13 @@ export default {
   position: fixed;
   bottom: 0;
   gap: 0.5rem;
+
+  @include laptop {
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: inherit;
+  }
 }
 </style>
