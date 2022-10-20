@@ -4,6 +4,10 @@
       <h4 class="title">Historial de transacciones</h4>
       <section class="transaction-history">
         <TransactionItem
+          v-show="!movements.length"
+          description="No hay transacciones registradas"
+        />
+        <TransactionItem
           v-for="item in movements"
           :key="item.id"
           :type="item.transactionType"
@@ -19,8 +23,9 @@
 <script setup>
 import Layout from "@/components/layouts/Default.vue";
 import TransactionItem from "@/components/app/transactionHistory/TransactionItem.vue";
+import { reactive } from "vue";
 
-const movements = [
+const movements = reactive([
   {
     id: 1,
     date: new Date("10-02-2022"),
@@ -105,7 +110,7 @@ const movements = [
     transactionName: "Venezuela",
     amount: -250.0,
   },
-];
+]);
 </script>
 
 <style lang="scss" scoped>
