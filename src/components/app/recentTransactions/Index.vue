@@ -1,113 +1,83 @@
 <template>
-  <section class="recent-ransaction-section">
-    <RecentTransactionItem
-      v-show="!movements.length"
-      transactionName="No hay transacciones recientes."
-    />
-    <RecentTransactionItem
-      v-for="item in movements"
-      :key="item.id"
-      :transactionName="item.transactionName"
-      :amount="item.amount"
-      :transactionType="item.transactionType"
-    />
-  </section>
+  <transition name="fade">
+    <section class="recent-ransaction-section">
+      <RecentTransactionItem
+        v-if="!transactions.length"
+        transactionName="No hay transacciones recientes."
+      />
+      <RecentTransactionItem
+        v-for="item in transactions"
+        :key="item.id"
+        :transactionName="item.transactionName"
+        :amount="item.amount"
+        :transactionType="item.transactionType"
+      />
+      <Loader v-if="isLoading" />
+    </section>
+  </transition>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, onMounted } from "vue";
+import {
+  collection,
+  getFirestore,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
+import Loader from "@/components/public/Loader.vue";
 import RecentTransactionItem from "@/components/app/recentTransactions/RecentTransactionItem.vue";
 
-const movements = reactive([
-  {
-    id: 1,
-    date: new Date("10-02-2022"),
-    transactionType: "outcome",
-    transactionName: "Almuerzo parrilla",
-    amount: -49.2,
-  },
-  {
-    id: 2,
-    date: new Date("10-01-2022"),
-    transactionType: "outcome",
-    transactionName: "Almuerzo ramen",
-    amount: -120.0,
-  },
-  {
-    id: 3,
-    date: new Date("09-30-2022"),
-    transactionType: "income",
-    transactionName: "Pago quincena",
-    amount: 2697.64,
-  },
-  {
-    id: 4,
-    date: new Date("09-30-2022"),
-    transactionType: "outcome",
-    transactionName: "Almuerzo chaufa y makis",
-    amount: -44.7,
-  },
-  {
-    id: 5,
-    date: new Date("09-28-2022"),
-    transactionType: "outcome",
-    transactionName: "Mercado del mes Metro",
-    amount: -340.53,
-  },
-  {
-    id: 6,
-    date: new Date("09-28-2022"),
-    transactionType: "outcome",
-    transactionName: "Ahorro en otra cuenta",
-    amount: -508.54,
-  },
-  {
-    id: 7,
-    date: new Date("09-27-2022"),
-    transactionType: "outcome",
-    transactionName: "Retiro de efectivo",
-    amount: -50.0,
-  },
-  {
-    id: 8,
-    date: new Date("09-26-2022"),
-    transactionType: "outcome",
-    transactionName: "Serv. mantenimiento",
-    amount: -160.43,
-  },
-  {
-    id: 9,
-    date: new Date("09-26-2022"),
-    transactionType: "outcome",
-    transactionName: "Gas Calida equivocado",
-    amount: -7.2,
-  },
-  {
-    id: 10,
-    date: new Date("09-26-2022"),
-    transactionType: "outcome",
-    transactionName: "Enel",
-    amount: -31.0,
-  },
-  {
-    id: 11,
-    date: new Date("09-26-2022"),
-    transactionType: "outcome",
-    transactionName: "Cena Rokys",
-    amount: -54.7,
-  },
-  {
-    id: 11,
-    date: new Date("09-26-2022"),
-    transactionType: "outcome",
-    transactionName: "Venezuela",
-    amount: -250.0,
-  },
-]);
+let isLoading = ref(true);
+let transactions = ref([]);
+
+onMounted(async () => {
+  getTransactions();
+  isLoading.value = false;
+});
+
+const getTransactions = async () => {
+  getAuth();
+  const uid = localStorage.getItem("uid");
+  const db = getFirestore();
+  const q = query(
+    collection(db, "transactions"),
+    where("uid", "==", uid),
+    orderBy("date", "desc")
+  );
+
+  onSnapshot(q, (querySnapshot) => {
+    const rawTransactions = [];
+    querySnapshot.forEach((doc) => {
+      rawTransactions.push({ doc_id: doc.id, data: doc.data() });
+    });
+
+    transactions.value = rawTransactions.map((ele) => {
+      return {
+        id: ele.doc_id,
+        date: ele.data.date,
+        transactionType: ele.data.transaction_type,
+        category: ele.data?.category,
+        type: ele.data.type,
+        transactionName: ele.data.name,
+        amount: ele.data.amount,
+        description: ele.data?.description,
+        holder: ele.data?.holder,
+        uid: ele.data.uid,
+      };
+    });
+  });
+};
 </script>
 
 <style lang="scss" scoped>
 .recent-ransaction-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;

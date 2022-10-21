@@ -5,11 +5,11 @@
       <section class="transaction-history">
         <Loader v-if="isLoading" />
         <TransactionItem
-          v-show="!movements.length"
+          v-show="!transactions.length"
           description="No hay transacciones registradas"
         />
         <TransactionItem
-          v-for="item in movements"
+          v-for="item in transactions"
           :key="item.id"
           :type="item.transactionType"
           :title="item.transactionName"
@@ -23,18 +23,61 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import getTransactions from "@/model/getTransactions";
+import {
+  collection,
+  getFirestore,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 import Layout from "@/components/layouts/Default.vue";
 import Loader from "@/components/public/Loader.vue";
 import TransactionItem from "@/components/app/transactionHistory/TransactionItem.vue";
 
-const movements = ref([]);
 let isLoading = ref(true);
+let transactions = ref([]);
 
 onMounted(async () => {
-  movements.value = await getTransactions();
+  getTransactions();
   isLoading.value = false;
 });
+
+const getTransactions = async () => {
+  getAuth();
+  const uid = localStorage.getItem("uid");
+  const db = getFirestore();
+  const q = query(
+    collection(db, "transactions"),
+    where("uid", "==", uid),
+    orderBy("date", "desc")
+  );
+
+  onSnapshot(q, (querySnapshot) => {
+    const rawTransactions = [];
+    querySnapshot.forEach((doc) => {
+      rawTransactions.push({ doc_id: doc.id, data: doc.data() });
+    });
+
+    transactions.value = rawTransactions.map((ele) => {
+      return {
+        id: ele.doc_id,
+        date: ele.data.date,
+        transactionType: ele.data.transaction_type,
+        category: ele.data?.category,
+        type: ele.data.type,
+        transactionName: ele.data.name,
+        amount: ele.data.amount,
+        description: ele.data?.description,
+        holder: ele.data?.holder,
+        uid: ele.data.uid,
+      };
+    });
+  });
+};
 </script>
 
 <style lang="scss" scoped>
