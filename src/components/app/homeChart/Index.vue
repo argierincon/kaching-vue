@@ -7,6 +7,16 @@
 </template>
 
 <script>
+import {
+  collection,
+  getFirestore,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 import { currencyFormater } from "/utils/currencyFormater";
 import Graphic from "@/components/app/homeChart/Graphic.vue";
 
@@ -17,7 +27,8 @@ export default {
       amount: null,
       totalAmount: null,
       currencyFormater,
-      movements: [
+      tr: [],
+      transactions: [
         {
           id: 1,
           date: new Date("09-26-2022"),
@@ -104,6 +115,7 @@ export default {
         },
       ],
       graphicLabel: "Disponible a la fecha",
+      auth: null,
     };
   },
   computed: {
@@ -111,7 +123,7 @@ export default {
       return this.amount !== null ? this.amount : this.totalAmount;
     },
     listAmounts() {
-      const last30Days = this.movements.filter((m) => {
+      const last30Days = this.transactions.filter((m) => {
         const today = new Date();
         const lastDays = today.setDate(today.getDate() - 30);
 
@@ -119,24 +131,61 @@ export default {
       });
 
       return last30Days.map((_, i) => {
-        const lastMovements = last30Days.slice(0, i + 1);
+        const lastTransactions = last30Days.slice(0, i + 1);
 
-        return lastMovements.reduce((suma, current) => {
+        return lastTransactions.reduce((suma, current) => {
           current.sum = suma + current.amount;
           return suma + current.amount;
         }, 0);
       });
     },
     totalAmount() {
-      return this.movements.reduce((suma, m) => {
+      return this.transactions.reduce((suma, m) => {
         return suma + m.amount;
       }, 0);
     },
   },
-  mounted() {
+  async mounted() {
     this.amount = this.listAmounts[this.listAmounts.length - 1];
+    await this.getTransactions();
+    console.log(this.tr);
   },
   methods: {
+    async getTransactions() {
+      this.auth = getAuth();
+
+      const uid = localStorage.getItem("uid");
+      const db = getFirestore();
+      const q = query(
+        collection(db, "transactions"),
+        where("uid", "==", uid),
+        orderBy("date", "desc")
+      );
+
+      onSnapshot(q, (querySnapshot) => {
+        const rawTransactions = [];
+        querySnapshot.forEach((doc) => {
+          rawTransactions.push({ doc_id: doc.id, data: doc.data() });
+        });
+
+        this.tr = rawTransactions.map((ele) => {
+          return {
+            id: ele.doc_id,
+            date: ele.data.date,
+            transactionType: ele.data.transaction_type,
+            category: ele.data?.category,
+            type: ele.data.type,
+            transactionName: ele.data.name,
+            amount: ele.data.amount,
+            description: ele.data?.description,
+            holder: ele.data?.holder,
+            uid: ele.data.uid,
+          };
+        });
+
+        // console.log(this.tr, "FFFF");
+      });
+    },
     selected(pointSelected) {
       const label = this.formatingDate(pointSelected);
       this.graphicLabel = `${label[0].toUpperCase()}${label.substring(1)}`;
@@ -156,10 +205,10 @@ export default {
       };
 
       if (pointSelected === undefined) {
-        return this.movements[0].date.toLocaleDateString("es-MX", options);
+        return this.transactions[0].date.toLocaleDateString("es-MX", options);
       }
 
-      return this.movements
+      return this.transactions
         .find((ele) => ele.sum === pointSelected)
         .date.toLocaleDateString("es-MX", options);
     },
