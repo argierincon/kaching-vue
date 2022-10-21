@@ -57,7 +57,7 @@ import vSelect from "@/components/app/inputs/Select.vue";
 import vTextarea from "@/components/app/inputs/Textarea.vue";
 
 const db = getFirestore();
-const colRef = collection(db, "incomes");
+const colRef = collection(db, "transactions");
 
 const props = defineProps({
   btnCancel: { type: Function },
@@ -75,11 +75,14 @@ const description = ref("");
 const uid = localStorage.getItem("uid");
 
 const dataObj = reactive({
+  transaction_type: "income",
+  date: new Date("10-19-2022"),
   type: incomeType,
+  category: "NA",
   name: incomeName,
-  holder: holder,
   amount: amount,
   description: description,
+  holder: holder,
   uid,
 });
 
