@@ -78,6 +78,7 @@ const closeOut = () => {
 }
 
 .close-icon {
+  transform: rotate(-360deg);
   color: $color-black-light;
   position: absolute;
   top: 1rem;
@@ -87,6 +88,7 @@ const closeOut = () => {
 
   &:hover {
     transition: color 0.4s ease;
+    transform: rotate(360deg);
     color: $color-black-blue;
   }
 }

@@ -89,7 +89,7 @@ const closeOut = () => {
   display: none;
 
   @include laptop {
-    transform: rotate(0deg);
+    transform: rotate(-360deg);
     display: block;
     color: $color-black-light;
     position: absolute;
@@ -100,7 +100,7 @@ const closeOut = () => {
     transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
 
     &:hover {
-      transform: rotate(270deg);
+      transform: rotate(360deg);
       transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
       color: $color-black-blue;
     }
