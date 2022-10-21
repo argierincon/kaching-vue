@@ -34,31 +34,36 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+// import { useStore } from "vuex";
 import {
   getAuth,
-  signInWithPopup,
   signInWithRedirect,
+  signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
+
+import { verifyToken } from "@/jwt";
 import Btn from "@/components/public/Btn.vue";
 import router from "@/router/index";
-import { verifyToken } from "@/jwt";
 
+// const store = useStore();
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
 let tokenHasFailed = ref(false);
 
+// const currentUser = computed(() => store.state.user);
+
 const googleSignIn = async () => {
   try {
     const { user } = await signInWithPopup(auth, provider);
-
     const { user_id } = verifyToken(user.accessToken);
-    if (user_id === user.uid) {
+
+    if (user.uid === user_id) {
+      // store.commit("updateUser", user.auth.currentUser);
       localStorage.setItem("accessToken", user.accessToken);
       localStorage.setItem("uid", user.uid);
-      localStorage.setItem("name", user.displayName);
       router.push("/");
     } else {
       tokenHasFailed.value = true;
