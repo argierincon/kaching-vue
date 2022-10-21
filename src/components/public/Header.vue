@@ -36,7 +36,8 @@ export default {
 
       signOut(auth)
         .then(() => {
-          localStorage.setItem("accessToken", "");
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("uid");
           this.$router.push("/login");
         })
         .catch((error) => {
