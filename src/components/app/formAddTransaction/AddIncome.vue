@@ -74,9 +74,15 @@ const description = ref("");
 
 const uid = localStorage.getItem("uid");
 
+const dateTr = {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+};
+
 const dataObj = reactive({
   transaction_type: "income",
-  date: new Date("10-19-2022"),
+  date: new Date().toLocaleDateString("es-Es", dateTr),
   type: incomeType,
   category: "NA",
   name: incomeName,
