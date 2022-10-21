@@ -13,7 +13,7 @@
       </ul>
     </nav>
     <section class="tab-content">
-      <transition name="fade">
+      <transition name="slide">
         <component :is="currentTab"></component>
       </transition>
     </section>
@@ -104,14 +104,14 @@ export default {
 
 // Clases de transicion
 
-.fade-enter-from,
-.fade-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   transform: translateX(20px);
   opacity: 0;
 }
 
-.fade-enter-active,
-.fade-enter-to {
+.slide-enter-active,
+.slide-enter-to {
   transition: all 0.3s ease-out;
 }
 </style>
