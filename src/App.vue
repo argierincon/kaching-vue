@@ -2,7 +2,7 @@
   <Suspense>
     <template #default>
       <router-view v-slot="{ Component }">
-        <transition name="fade">
+        <transition name="fade-home">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -37,13 +37,16 @@ export default {
 @import "./assets/scss/reset.scss";
 @import "./assets/scss/fonts.scss";
 
-.fade-enter-from,
-.fade-leave-to {
+/* from es cuando inicia la transicion, active es cuando esta sucediendo la transicion y to es cuando finaliza */
+/* enter = inicio, leave = final */
+.fade-home-enter-from,
+.fade-home-leave-to {
   opacity: 0;
+  position: absolute;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s ease-out;
+.fade-home-leave-active,
+.fade-home-enter-active {
+  transition: opacity 0.4s ease;
 }
 </style>
