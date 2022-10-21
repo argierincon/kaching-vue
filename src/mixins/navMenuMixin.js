@@ -41,12 +41,6 @@ export default {
       ],
     };
   },
-  computed: {
-    test() {
-      console.log("FFF");
-      return this.$route.path === "/historial-de-transacciones";
-    },
-  },
   methods: {
     routerHome() {
       this.$router.push("/");
