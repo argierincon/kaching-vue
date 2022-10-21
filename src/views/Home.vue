@@ -1,44 +1,44 @@
 <template>
   <Layout>
-    <template #header>
-      <Header />
-    </template>
-
     <template #main-content>
-      <section class="home-grid">
-        <BalanceBox class="balance" />
-        <IncomeOutcomeBox class="income" label="Ingresos" />
-        <IncomeOutcomeBox class="outcome" label="Gastos" />
-      </section>
+      <section class="home-main">
+        <div class="main-left">
+          <div class="home-grid">
+            <BalanceBox class="balance" />
+            <IncomeOutcomeBox class="income" label="Ingresos" />
+            <IncomeOutcomeBox class="outcome" label="Gastos" />
+          </div>
 
-      <NavigationTabs class="nav-tabs" :tabs="tabs" />
+          <NavigationTabs class="nav-tabs" :tabs="tabs" />
+
+          <SavingsChart class="tab-desktop home-chart" />
+        </div>
+
+        <div class="tab-desktop">
+          <h4 class="title">Transacciones recientes</h4>
+          <RecentTransactionsSection class="transactions-home" />
+        </div>
+      </section>
     </template>
   </Layout>
 </template>
 
 <script>
 import Layout from "@/components/layouts/Default.vue";
-import Header from "@/components/public/Header.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
 import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
 import SavingsChart from "@/components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
-import {
-  collection,
-  getFirestore,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
 
 export default {
   components: {
     Layout,
-    Header,
     BalanceBox,
     IncomeOutcomeBox,
     NavigationTabs,
+    SavingsChart,
+    RecentTransactionsSection,
   },
   data() {
     return {
@@ -56,34 +56,30 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.test();
-    const name = localStorage.getItem("name");
-    console.log(name);
-  },
-  methods: {
-    async test() {
-      const uid = localStorage.getItem("uid");
-      const db = getFirestore();
-      const q = query(collection(db, "incomes"), where("uid", "==", uid));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
+.home-main {
+  @include laptop {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    justify-content: center;
+    gap: 4rem;
+  }
+}
+
 .home-grid {
   display: grid;
   gap: 1rem;
   grid-template-areas:
     "A A A A   A A A A"
-    "B B B B   C C C C"
     "B B B B   C C C C";
+
+  @include laptop {
+    margin-bottom: 3rem;
+    grid-template-rows: repeat(2, 100px);
+  }
 }
 
 .balance {
@@ -100,5 +96,38 @@ export default {
 
 .nav-tabs {
   margin-top: 1.25rem;
+
+  @include laptop {
+    display: none;
+  }
+}
+
+.tab-desktop {
+  display: none;
+
+  @include laptop {
+    display: block;
+  }
+}
+
+.title {
+  margin-bottom: 1.25rem;
+  color: $color-primary;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.transactions-home {
+  height: calc(100vh - 230px);
+  max-width: 80%;
+  padding: 2px;
+  margin: auto;
+  overflow-y: auto;
+}
+
+.home-chart {
+  margin: auto;
+  max-width: 75%;
 }
 </style>
