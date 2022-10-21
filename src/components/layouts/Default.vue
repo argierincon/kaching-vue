@@ -39,7 +39,6 @@ export default {
 .default-layout {
   width: 100%;
   padding-bottom: 60px;
-  position: absolute;
 
   @include laptop {
     padding-bottom: 0;
