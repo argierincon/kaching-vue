@@ -12,15 +12,15 @@
         stroke="#cacaca"
         stroke-width="1.8"
         x1="0"
-        :y1="zero"
+        :y1="zero ? zero : 100"
         x2="300"
-        :y2="zero"
+        :y2="zero ? zero : 100"
       />
       <polyline
         fill="none"
         stroke="#4cc5f9"
         stroke-width="1.8"
-        :points="chartPoints"
+        :points="[100, 100] || chartPoints"
       />
       <!-- points="0,0 100,100 200,100 300,200 " -->
       <!-- line y -->
