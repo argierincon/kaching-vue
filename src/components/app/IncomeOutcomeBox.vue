@@ -35,7 +35,7 @@ const { amount } = toRefs(props);
   }
 
   &__amount {
-    font-weight: 400;
+    font-weight: 600;
 
     @include laptop {
       font-size: 1.25rem;
