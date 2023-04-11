@@ -135,7 +135,6 @@ const selected = (pointSelected) => {
 };
 
 const formatingDate = (pointSelected) => {
-  console.log(pointSelected);
   if (pointSelected.date === undefined) {
     if (pointSelected.screenPoint < 0) {
       return transactions.value[0].date.toLocaleDateString("es-MX", options);
