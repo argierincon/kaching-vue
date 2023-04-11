@@ -1,11 +1,15 @@
 <template>
   <section class="chart-section">
+    <p class="label-saved">Disponible</p>
     <p class="label-saved">{{ graphicLabel }}</p>
     <h6 class="amount-saved">
       {{ currencyFormater.format(showAmount) }}
     </h6>
-    {{ listAmounts }}
-    <Graphic :amounts="listAmounts" @pointSelected="selected" />
+    <Graphic
+      v-if="listAmounts.length"
+      :amounts="listAmounts"
+      @pointSelected="selected"
+    />
   </section>
 </template>
 
@@ -22,14 +26,25 @@ import { getAuth } from "firebase/auth";
 
 import { currencyFormater } from "/utils/currencyFormater";
 import Graphic from "@/components/app/homeChart/Graphic.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
-const graphicLabel = ref("Disponible a la fecha");
 const amount = ref(null);
+const amountObj = ref(null);
 const totalAmount = ref(null);
 const listAmounts = ref([]);
+const listAmountsClean = ref([]);
 const transactions = ref([]);
 const auth = ref(null);
+
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+const todayDate = new Date().toLocaleDateString("es-MX", options);
+
+const graphicLabel = ref(todayDate);
 
 const getTransactions = async () => {
   auth.value = getAuth();
@@ -43,13 +58,12 @@ const getTransactions = async () => {
   );
 
   onSnapshot(q, (querySnapshot) => {
-    console.log("ME EJECUTE");
     const rawTransactions = [];
     querySnapshot.forEach((doc) => {
       rawTransactions.push({ doc_id: doc.id, data: doc.data() });
     });
 
-    transactions.value = rawTransactions.map((ele) => {
+    const allTransactions = rawTransactions.map((ele) => {
       return {
         id: ele.doc_id,
         date: new Date(ele.data.date),
@@ -64,6 +78,10 @@ const getTransactions = async () => {
       };
     });
 
+    transactions.value = allTransactions.sort((a, b) => {
+      return a.date.getDate() - b.date.getDate();
+    });
+
     totalAmount.value = transactions.value.reduce((suma, m) => {
       return suma + m.amount;
     }, 0);
@@ -73,27 +91,23 @@ const getTransactions = async () => {
       const today = new Date();
       const lastDays = today.setDate(today.getDate() - 30);
 
-      console.log(m, "M>DATE");
-
-      console.log(new Date(m.date).getDate(), "getDate");
-
       return m.date > lastDays;
     });
 
-    listAmounts.value = last30Days.map((_, i) => {
+    listAmounts.value = last30Days.map((ele, i) => {
       const lastTransactions = last30Days.slice(0, i + 1);
 
-      return lastTransactions.reduce((suma, current) => {
+      const suma = lastTransactions.reduce((suma, current) => {
         current.sum = suma + current.amount;
         return suma + current.amount;
       }, 0);
+
+      return { suma: suma, date: ele.date };
     });
 
     amount.value = listAmounts.value.length
-      ? listAmounts.value[listAmounts.value.length - 1]
+      ? listAmounts.value[listAmounts.value.length - 1].suma
       : 0;
-
-    console.log("FIN DE LA EJECUCION");
   });
 };
 
@@ -104,34 +118,23 @@ const showAmount = computed(() => {
 });
 
 const selected = (pointSelected) => {
-  const label = formatingDate(pointSelected);
-
-  // console.log(pointSelected);
+  const label = formatingDate(pointSelected.date);
   graphicLabel.value = `${label[0].toUpperCase()}${label.substring(1)}`;
-  // console.log(graphicLabel.value, "graphicLabel.value ");
 
-  amount.value = pointSelected;
-  if (amount.value === undefined) amount.value = listAmounts.value[0];
+  amount.value = pointSelected.point;
+  amountObj.value = pointSelected;
+
+  if (pointSelected.point === undefined) {
+    amount.value = listAmounts.value[0].suma;
+  }
 };
 
-const formatingDate = (pointSelected) => {
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-
-  if (pointSelected === undefined) {
+const formatingDate = (datePointSelected) => {
+  if (datePointSelected === undefined) {
     return transactions.value[0].date.toLocaleDateString("es-MX", options);
   }
 
-  const a = transactions.value.find((ele) => ele.sum === pointSelected);
-
-  console.log(a, "AAAA");
-  return transactions.value
-    .find((ele) => ele.sum === pointSelected)
-    .date.toLocaleDateString("es-MX", options);
+  return datePointSelected.toLocaleDateString("es-MX", options);
 };
 </script>
 
