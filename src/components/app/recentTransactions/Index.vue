@@ -11,6 +11,7 @@
         :key="item.id"
         :transactionName="item.transactionName"
         :amount="item.amount"
+        :date="new Date(item.date).toLocaleDateString('es-MX', options)"
         :transactionType="item.transactionType"
       />
       <Loader v-if="isLoading" />
@@ -36,6 +37,16 @@ import RecentTransactionItem from "@/components/app/recentTransactions/RecentTra
 
 let isLoading = ref(true);
 let transactions = ref([]);
+
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  hourCycle: "h12",
+};
 
 onMounted(async () => {
   getTransactions();
