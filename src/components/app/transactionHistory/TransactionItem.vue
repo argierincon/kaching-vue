@@ -1,5 +1,12 @@
 <template>
-  <article class="item-transaction" :class="type">
+  <article
+    class="item-transaction"
+    :class="{
+      'mb-tr': !description,
+      income: type === 'income',
+      outcome: type === 'outcome',
+    }"
+  >
     <!-- <button v-show="amount" class="ellipsis-icon">
       <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
     </button> -->
@@ -117,6 +124,10 @@ switch (type.value) {
       }
     }
   }
+}
+
+.mb-tr {
+  padding-bottom: 6px !important;
 }
 
 .content-default {
