@@ -25,8 +25,8 @@ import { defineProps, toRefs, ref } from "vue";
 const props = defineProps({
   showModal: { type: Boolean, required: true },
   closeOutside: { type: Boolean, required: true },
-  test: { type: String, required: true },
-  b: { type: Boolean, required: true },
+  // test: { type: String, required: true },
+  // b: { type: Boolean, required: true },
 });
 
 const { showModal, closeOutside } = toRefs(props);
