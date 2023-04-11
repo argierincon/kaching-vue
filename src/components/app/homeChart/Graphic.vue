@@ -49,8 +49,6 @@ const { amounts } = toRefs(props);
 
 const internAmounts = amounts.value.map((ele) => ele.suma);
 
-console.log(internAmounts);
-
 const amountToPixels = (amount) => {
   const min = Math.min(...internAmounts);
   const max = Math.max(...internAmounts);
