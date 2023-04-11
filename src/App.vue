@@ -2,7 +2,7 @@
   <Suspense>
     <template #default>
       <router-view v-slot="{ Component }">
-        <transition name="fade-home">
+        <transition name="fade-home" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
