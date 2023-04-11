@@ -118,23 +118,34 @@ const showAmount = computed(() => {
 });
 
 const selected = (pointSelected) => {
-  const label = formatingDate(pointSelected.date);
+  const label = formatingDate(pointSelected);
   graphicLabel.value = `${label[0].toUpperCase()}${label.substring(1)}`;
 
   amount.value = pointSelected.point;
   amountObj.value = pointSelected;
 
   if (pointSelected.point === undefined) {
-    amount.value = listAmounts.value[0].suma;
+    if (pointSelected.screenPoint < 0) {
+      amount.value = listAmounts.value[0].suma;
+    } else {
+      const last = listAmounts.value.length - 1;
+      amount.value = listAmounts.value[last].suma;
+    }
   }
 };
 
-const formatingDate = (datePointSelected) => {
-  if (datePointSelected === undefined) {
-    return transactions.value[0].date.toLocaleDateString("es-MX", options);
+const formatingDate = (pointSelected) => {
+  console.log(pointSelected);
+  if (pointSelected.date === undefined) {
+    if (pointSelected.screenPoint < 0) {
+      return transactions.value[0].date.toLocaleDateString("es-MX", options);
+    } else {
+      const last = listAmounts.value.length - 1;
+      return transactions.value[last].date.toLocaleDateString("es-MX", options);
+    }
   }
 
-  return datePointSelected.toLocaleDateString("es-MX", options);
+  return pointSelected.date.toLocaleDateString("es-MX", options);
 };
 </script>
 

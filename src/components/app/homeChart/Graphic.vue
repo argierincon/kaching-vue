@@ -86,6 +86,7 @@ watch(pointer, (value) => {
   emit("pointSelected", {
     point: internAmounts[index - 1],
     date: amounts.value[index - 1]?.date,
+    screenPoint: pointer.value,
   });
 });
 
