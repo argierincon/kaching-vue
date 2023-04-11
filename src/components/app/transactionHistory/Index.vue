@@ -14,6 +14,7 @@
           :type="item.transactionType"
           :title="item.transactionName"
           :amount="item.amount"
+          :date="new Date(item.date).toLocaleDateString('es-MX', options)"
           :description="item.description"
         />
       </section>
@@ -40,6 +41,16 @@ import TransactionItem from "@/components/app/transactionHistory/TransactionItem
 
 let isLoading = ref(true);
 let transactions = ref([]);
+
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  hourCycle: "h12",
+};
 
 onMounted(async () => {
   getTransactions();
