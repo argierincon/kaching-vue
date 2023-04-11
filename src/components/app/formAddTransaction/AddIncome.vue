@@ -10,8 +10,8 @@
       required
       hasMiniLabel
     >
-      <option class="option" value="Transferencia">Transferencia</option>
-      <option class="option" value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+      <option value="Efectivo">Efectivo</option>
     </v-select>
 
     <v-input
@@ -48,7 +48,7 @@
 
 <script setup>
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { defineProps, toRefs, ref, reactive } from "vue";
+import { defineProps, toRefs, ref, reactive, computed } from "vue";
 
 import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
@@ -65,6 +65,7 @@ const props = defineProps({
 const { btnCancel } = toRefs(props);
 
 let isLoading = ref(false);
+const today = ref(null);
 const form = ref("");
 const incomeType = ref("");
 const incomeName = ref("");
@@ -74,15 +75,11 @@ const description = ref("");
 
 const uid = localStorage.getItem("uid");
 
-const dateTr = {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-};
+const setTodayDate = computed(() => new Date());
 
 const dataObj = reactive({
   transaction_type: "income",
-  date: new Date().toLocaleDateString("es-Es", dateTr),
+  date: new Date().toString(),
   type: incomeType,
   category: "NA",
   name: incomeName,

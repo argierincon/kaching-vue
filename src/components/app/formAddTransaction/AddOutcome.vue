@@ -84,7 +84,7 @@
 
 <script setup>
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { defineProps, toRefs, ref, reactive } from "vue";
+import { defineProps, toRefs, ref, reactive, computed } from "vue";
 
 import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
@@ -109,13 +109,21 @@ const amount = ref(null);
 const description = ref("");
 const uid = localStorage.getItem("uid");
 
+const dateTr = {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+};
+
+const savedAmount = computed(() => amount.value * -1);
+
 const dataObj = reactive({
   transaction_type: "outcome",
-  date: new Date("10-20-2022"),
+  date: new Date().toString(),
   type: outcomeType,
   category: outcomeCategory,
   name: outcomeName,
-  amount: amount,
+  amount: savedAmount,
   description: description,
   holder: "NA",
   uid,
