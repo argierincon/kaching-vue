@@ -23,6 +23,7 @@
       hasMiniLabel
     >
       <option class="option" value="Arrendamiento">Arrendamiento</option>
+      <option class="option" value="Víveres">Retiro</option>
       <option class="option" value="Víveres">Víveres</option>
       <option class="option" value="Comida">Restaurantes y hoteles</option>
       <option class="option" value="Transporte">Transporte</option>
