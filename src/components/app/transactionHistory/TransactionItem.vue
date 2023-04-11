@@ -1,13 +1,14 @@
 <template>
   <article class="item-transaction" :class="type">
-    <button v-show="amount" class="ellipsis-icon">
+    <!-- <button v-show="amount" class="ellipsis-icon">
       <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
-    </button>
+    </button> -->
     <div v-show="amount" class="item-transaction__header">
       <svg-icon type="mdi" size="20" :path="elemsItem.icon"></svg-icon>
       <p class="transaction-title">{{ title }}</p>
       <p class="transaction-amount">{{ currencyAmount }}</p>
     </div>
+    <p class="transaction-date">{{ date }}</p>
     <div v-if="!amount" class="content-default">
       <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
       <p>{{ description }}</p>
@@ -34,6 +35,7 @@ const props = defineProps({
   type: { type: String },
   title: { type: String },
   amount: { type: String },
+  date: { type: String },
   description: { type: String },
 });
 
@@ -93,7 +95,7 @@ switch (type.value) {
     }
 
     p {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 0.9rem;
 
       @include laptop {
@@ -151,5 +153,12 @@ switch (type.value) {
 
 .transaction-amount {
   margin-left: auto;
+}
+
+.transaction-date {
+  font-size: 11px;
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 2px;
 }
 </style>
