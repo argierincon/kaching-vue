@@ -72,7 +72,7 @@ const chartPoints = computed(() => {
     const x = (300 / total) * (idx + 1);
     const y = amountToPixels(currentAmount);
     return `${accPoints} ${x}, ${y}`;
-  }, `0, ${amountToPixels(internAmounts.length ? internAmounts[0] : 0)}`);
+  }, `0, ${amountToPixels(internAmounts[0])}`);
 });
 
 const showPointer = ref(false);
