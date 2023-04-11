@@ -4,7 +4,7 @@
       <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
     </button>
     <div v-show="amount" class="item-transaction__header">
-      <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
+      <svg-icon type="mdi" size="20" :path="elemsItem.icon"></svg-icon>
       <p class="transaction-title">{{ title }}</p>
       <p class="transaction-amount">{{ currencyAmount }}</p>
     </div>
@@ -19,9 +19,14 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, computed } from "vue";
+import { defineProps, toRefs, computed, reactive } from "vue";
 import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiDotsVertical, mdiMagnify } from "@mdi/js";
+import {
+  mdiDotsVertical,
+  mdiArrowTopRight,
+  mdiArrowBottomRight,
+  mdiMagnify,
+} from "@mdi/js";
 
 import { currencyFormater } from "/utils/currencyFormater";
 
@@ -35,6 +40,34 @@ const props = defineProps({
 const { type, title, amount, description } = toRefs(props);
 
 const currencyAmount = computed(() => currencyFormater.format(amount.value));
+
+let elemsItem = reactive({
+  class: "",
+  icon: mdiMagnify,
+});
+
+switch (type.value) {
+  case "income":
+    elemsItem = {
+      class: "income",
+      icon: mdiArrowTopRight,
+    };
+    break;
+
+  case "outcome":
+    elemsItem = {
+      class: "outcome",
+      icon: mdiArrowBottomRight,
+    };
+    break;
+
+  default:
+    elemsItem = {
+      class: "",
+      icon: mdiMagnify,
+    };
+    break;
+}
 </script>
 
 <style lang="scss" scoped>
