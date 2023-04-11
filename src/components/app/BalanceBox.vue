@@ -1,6 +1,6 @@
 <template>
   <div class="balance-box">
-    <p class="balance-box__title">BALANCE</p>
+    <p class="balance-box__title">DISPONIBLE</p>
     <h6 class="balance-box__amount">{{ currencyFormater.format(balance) }}</h6>
   </div>
 </template>
