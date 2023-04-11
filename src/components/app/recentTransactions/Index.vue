@@ -5,6 +5,7 @@
         v-if="!transactions.length"
         transactionName="No hay transacciones recientes."
       />
+
       <RecentTransactionItem
         v-for="item in transactions"
         :key="item.id"
@@ -57,20 +58,24 @@ const getTransactions = async () => {
       rawTransactions.push({ doc_id: doc.id, data: doc.data() });
     });
 
-    transactions.value = rawTransactions.map((ele) => {
-      return {
-        id: ele.doc_id,
-        date: ele.data.date,
-        transactionType: ele.data.transaction_type,
-        category: ele.data?.category,
-        type: ele.data.type,
-        transactionName: ele.data.name,
-        amount: ele.data.amount,
-        description: ele.data?.description,
-        holder: ele.data?.holder,
-        uid: ele.data.uid,
-      };
-    });
+    transactions.value = rawTransactions
+      .map((ele) => {
+        return {
+          id: ele.doc_id,
+          date: new Date(ele.data.date),
+          transactionType: ele.data.transaction_type,
+          category: ele.data?.category,
+          type: ele.data.type,
+          transactionName: ele.data.name,
+          amount: ele.data.amount,
+          description: ele.data?.description,
+          holder: ele.data?.holder,
+          uid: ele.data.uid,
+        };
+      })
+      .sort((a, b) => {
+        return b.date.getDate() - a.date.getDate();
+      });
   });
 };
 </script>
