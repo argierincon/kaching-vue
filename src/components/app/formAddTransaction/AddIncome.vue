@@ -40,7 +40,7 @@
     <v-textarea label="Descripción" v-model="description" />
 
     <div class="form-add-transaction__buttons">
-      <Btn label="Cancelar" btnType="secondary" :onClick="btnCancel" />
+      <Btn label="Volver" btnType="secondary" :onClick="btnCancel" />
       <Btn label="Guardar" type="submit" />
     </div>
   </form>
@@ -49,6 +49,7 @@
 <script setup>
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { defineProps, toRefs, ref, reactive, computed } from "vue";
+import { useRouter } from "vue-router";
 
 import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
@@ -56,13 +57,15 @@ import vInput from "@/components/app/inputs/Input.vue";
 import vSelect from "@/components/app/inputs/Select.vue";
 import vTextarea from "@/components/app/inputs/Textarea.vue";
 
+const router = useRouter();
+
 const db = getFirestore();
 const colRef = collection(db, "transactions");
 
-const props = defineProps({
-  btnCancel: { type: Function },
-});
-const { btnCancel } = toRefs(props);
+// const props = defineProps({
+//   btnCancel: { type: Function },
+// });
+// const { btnCancel } = toRefs(props);
 
 let isLoading = ref(false);
 const today = ref(null);
@@ -96,8 +99,11 @@ const submit = async () => {
 
   console.log("Document was created with ID:", docRef.id);
 
-  btnCancel.value();
   form.value.reset();
+};
+
+const btnCancel = () => {
+  router.push({ path: "/" });
 };
 </script>
 
