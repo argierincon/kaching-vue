@@ -5,31 +5,49 @@
       :key="item.id"
       :label="item.label"
       :icon="item.icon"
-      :onClick="item.click"
-      :isActive="item.isActive"
+      :path="item.path"
+      :isActive="item.path === this.$route.path"
     />
   </nav>
 </template>
 
 <script>
-import { mdiHome } from "@mdi/js";
 import MenuItem from "./MenuItem.vue";
+import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
 
 export default {
   components: {
     MenuItem,
   },
-  props: {
-    optionsMenu: {
-      type: Array,
-      default: () => [
+  data() {
+    return {
+      optionsMenu: [
         {
           id: "1",
           icon: mdiHome,
           label: "Inicio",
+          path: "/",
+        },
+        {
+          id: "2",
+          icon: mdiCashPlus,
+          label: "Ingreso",
+          path: "/add-income",
+        },
+        {
+          id: "3",
+          icon: mdiCashMinus,
+          label: "Gasto",
+          path: "/add-outcome",
+        },
+        {
+          id: "4",
+          icon: mdiCashClock,
+          label: "Historial",
+          path: "/historial-de-transacciones",
         },
       ],
-    },
+    };
   },
 };
 </script>
