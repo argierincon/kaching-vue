@@ -1,34 +1,19 @@
 <template>
-  <Suspense>
-    <template #default>
-      <router-view v-slot="{ Component }">
-        <transition name="fade-home" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </template>
-    <template #fallback>
-      <SplashScreen />
-    </template>
-  </Suspense>
+  <component :is="layout">
+    <transition name="fade-home" mode="out-in">
+      <router-view />
+    </transition>
+  </component>
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
-
-import SplashScreen from "@/components/public/SplashScreen.vue";
-
+const defaultLayout = "default";
 export default {
-  components: {
-    Home: defineAsyncComponent(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(require("./views/Home.vue"));
-          }, 1000);
-        })
-    ),
-    SplashScreen,
+  name: "App",
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || defaultLayout) + "-layout";
+    },
   },
 };
 </script>
