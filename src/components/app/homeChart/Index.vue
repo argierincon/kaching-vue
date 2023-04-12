@@ -26,7 +26,7 @@ import { getAuth } from "firebase/auth";
 
 import { currencyFormater } from "/utils/currencyFormater";
 import Graphic from "@/components/app/homeChart/Graphic.vue";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 
 const amount = ref(null);
 const amountObj = ref(null);
@@ -42,6 +42,7 @@ const options = {
   month: "long",
   day: "numeric",
 };
+
 const todayDate = new Date().toLocaleDateString("es-MX", options);
 
 const graphicLabel = ref(todayDate);
@@ -111,7 +112,7 @@ const getTransactions = async () => {
   });
 };
 
-await getTransactions();
+onMounted(async () => await getTransactions());
 
 const showAmount = computed(() => {
   return amount.value !== null ? amount.value : totalAmount.value;
