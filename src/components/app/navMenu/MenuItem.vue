@@ -1,8 +1,12 @@
 <template>
-  <div class="menu-item">
-    <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
-    <p class="label">{{ label }}</p>
-  </div>
+  <router-link :to="path">
+    <div class="menu-item" :class="{ active: isActive }">
+      <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
+      <p class="label">
+        {{ label }}
+      </p>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -16,6 +20,8 @@ export default {
   props: {
     icon: { type: String, default: mdiBell },
     label: { type: String, default: "HOME" },
+    path: { type: String, default: "/" },
+    isActive: { type: Boolean, default: false },
   },
 };
 </script>
@@ -35,6 +41,13 @@ export default {
       transition: all 0.4s ease;
     }
   }
+
+  &.active {
+    .label,
+    .icon {
+      color: $color-primary;
+    }
+  }
 }
 
 .icon {
@@ -45,5 +58,9 @@ export default {
   font-size: 0.65rem;
   font-weight: 300;
   color: $color-black-light;
+
+  @include laptop {
+    font-size: 0.75rem;
+  }
 }
 </style>

@@ -12,9 +12,9 @@
         stroke="#cacaca"
         stroke-width="1.8"
         x1="0"
-        :y1="zero"
+        :y1="zero ? zero : 100"
         x2="300"
-        :y2="zero"
+        :y2="zero ? zero : 100"
       />
       <polyline
         fill="none"
@@ -47,9 +47,11 @@ const props = defineProps({
 
 const { amounts } = toRefs(props);
 
+const internAmounts = amounts.value.map((ele) => ele.suma);
+
 const amountToPixels = (amount) => {
-  const min = Math.min(...amounts.value);
-  const max = Math.max(...amounts.value);
+  const min = Math.min(...internAmounts);
+  const max = Math.max(...internAmounts);
 
   const AbsoluteAmount = amount + Math.abs(min);
   const minMaxDistance = Math.abs(max) + Math.abs(min);
@@ -62,13 +64,13 @@ const zero = computed(() => {
 });
 
 const chartPoints = computed(() => {
-  const total = amounts.value.length;
+  const total = internAmounts.length;
 
-  return amounts.value.reduce((accPoints, currentAmount, idx) => {
+  return internAmounts.reduce((accPoints, currentAmount, idx) => {
     const x = (300 / total) * (idx + 1);
     const y = amountToPixels(currentAmount);
     return `${accPoints} ${x}, ${y}`;
-  }, `0, ${amountToPixels(amounts.value.length ? amounts.value[0] : 0)}`);
+  }, `0, ${amountToPixels(internAmounts[0])}`);
 });
 
 const showPointer = ref(false);
@@ -78,8 +80,12 @@ const emit = defineEmits(["pointSelected"]);
 
 watch(pointer, (value) => {
   const index = Math.ceil(value / (300 / amounts.value.length));
-  if (index < 0 || index > amounts.value.length) return;
-  emit("pointSelected", amounts.value[index - 1]);
+  if (index < 0 || index > amounts.value) return;
+  emit("pointSelected", {
+    point: internAmounts[index - 1],
+    date: amounts.value[index - 1]?.date,
+    screenPoint: pointer.value,
+  });
 });
 
 const tap = ({ target, touches }) => {
@@ -112,6 +118,10 @@ const untap = () => {
     font-size: 0.9rem;
     color: $color-black-light;
     text-align: center;
+
+    @include laptop {
+      font-size: 1.1rem;
+    }
   }
 }
 </style>

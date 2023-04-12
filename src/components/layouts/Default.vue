@@ -1,23 +1,42 @@
 <template>
   <section class="default-layout">
-    <slot name="header"></slot>
+    <Header />
+
     <main>
-      <slot name="main-content"></slot>
+      <slot></slot>
     </main>
-    <slot name="nav-menu"></slot>
+
+    <NavMenu :optionsMenu="optMenu" class="layout-menu" />
   </section>
 </template>
 
 <script>
-export default {};
+import Header from "@/components/public/Header.vue";
+import NavMenu from "@/components/app/navMenu/Index.vue";
+import menuElemsMixin from "@/mixins/navMenuMixin.js";
+
+export default {
+  name: "navMenu",
+  mixins: [menuElemsMixin],
+  components: { Header, NavMenu },
+};
 </script>
 
 <style lang="scss" scoped>
 .default-layout {
+  width: 100%;
   padding-bottom: 60px;
 
+  @include laptop {
+    padding-bottom: 0;
+  }
+
   main {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+
+    @include laptop {
+      padding: 146px 1.5rem 1.5rem 104px;
+    }
   }
 }
 </style>

@@ -7,13 +7,19 @@
     />
     <p class="header-title">K4CHING$!</p>
 
-    <svg-icon class="icon-bell" type="mdi" :path="iconBell"></svg-icon>
+    <svg-icon
+      @click="googleSignOut"
+      class="log-out"
+      type="mdi"
+      :path="iconLogOut"
+    ></svg-icon>
   </header>
 </template>
 
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiBell } from "@mdi/js";
+import { mdiLogout } from "@mdi/js";
+import { getAuth, signOut } from "firebase/auth";
 
 export default {
   components: {
@@ -21,26 +27,55 @@ export default {
   },
   data() {
     return {
-      iconBell: mdiBell,
+      iconLogOut: mdiLogout,
     };
+  },
+  methods: {
+    googleSignOut() {
+      const auth = getAuth();
+
+      signOut(auth)
+        .then(() => {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("uid");
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 header {
-  padding: 1.5rem 1.5rem 0;
+  width: 100%;
+  padding: 1rem 1rem 0 1rem;
   gap: 1rem;
   display: grid;
   grid-template-columns: 80px 1fr 30px;
   align-items: center;
+  // box-shadow: 0px 1px 2px rgba(85, 85, 85, 0.2);
 
-  @include tablet {
+  @include laptop {
+    padding: 1rem 3rem;
+    width: calc(100% - 80px);
+    position: fixed;
+    left: 80px;
+    background: $bg-color-app;
   }
 }
 
-.icon-bell {
+.log-out {
   color: $color-black-light;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transition: all 0.3s ease;
+    color: $color-primary;
+  }
 }
 
 .header-logo {

@@ -1,12 +1,22 @@
 <template>
   <div class="transaction-box">
-    <p class="transaction-box__title">Ingresos</p>
-    <p class="transaction-box__amount">s/3,500.40</p>
+    <p class="transaction-box__title">{{ label }}</p>
+    <p class="transaction-box__amount">
+      {{ currencyFormater.format(amount) }}
+    </p>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { defineProps, toRefs } from "vue";
+import { currencyFormater } from "/utils/currencyFormater";
+
+const props = defineProps({
+  label: { type: String, default: "Label" },
+  amount: { type: Number, default: 0 },
+});
+
+const { amount } = toRefs(props);
 </script>
 
 <style lang="scss" scoped>
@@ -19,10 +29,17 @@ export default {};
 
   &__title {
     font-weight: 500;
+    @include laptop {
+      font-size: 1.1rem;
+    }
   }
 
   &__amount {
-    font-weight: 400;
+    font-weight: 600;
+
+    @include laptop {
+      font-size: 1.25rem;
+    }
   }
 }
 </style>

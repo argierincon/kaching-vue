@@ -13,7 +13,7 @@
       </ul>
     </nav>
     <section class="tab-content">
-      <transition name="fade">
+      <transition name="slide">
         <component :is="currentTab"></component>
       </transition>
     </section>
@@ -74,8 +74,18 @@ export default {
     li {
       padding: 0.5em 1em;
       text-align: center;
-      font-size: 14px;
+      font-size: 0.85rem;
       cursor: pointer;
+      transition: color 0.3s ease;
+
+      @include laptop {
+        font-size: 0.95rem;
+      }
+
+      &:hover {
+        color: $color-primary;
+        transition: color 0.3s ease;
+      }
     }
 
     li.is-active {
@@ -94,14 +104,14 @@ export default {
 
 // Clases de transicion
 
-.fade-enter-from,
-.fade-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   transform: translateX(20px);
   opacity: 0;
 }
 
-.fade-enter-active,
-.fade-enter-to {
+.slide-enter-active,
+.slide-enter-to {
   transition: all 0.3s ease-out;
 }
 </style>

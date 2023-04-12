@@ -16,7 +16,7 @@ html {
 
 body {
   background: #fbfbfb;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -24,7 +24,6 @@ body {
 * {
   margin: 0;
   padding: 0;
-  border: 0;
   outline: 0;
   font-size: inherit;
   line-height: inherit;
@@ -41,6 +40,17 @@ body {
   text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #b5b5b5;
 }
 
 *:before,
@@ -96,11 +106,6 @@ dl,
 blockquote,
 table {
   margin: 0;
-}
-
-p {
-  font-size: 1rem;
-  text-align: justify;
 }
 
 ol {
@@ -192,4 +197,10 @@ menu,
 nav,
 section {
   display: block;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1rem;
+  }
 }

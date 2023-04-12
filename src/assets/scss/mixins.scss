@@ -1,0 +1,13 @@
+@mixin violet-box {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $bg-color-violet;
+  border-radius: 8px;
+  color: $color-primary;
+
+  @include laptop {
+    padding: 2rem;
+  }
+}

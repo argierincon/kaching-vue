@@ -1,0 +1,43 @@
+// Responsive mixins
+$mobile: 375px;
+$medium-mobile: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1200px;
+$widescreen: 1400px;
+
+@mixin mobile() {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin medium-mobile() {
+  @media (min-width: #{$medium-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin laptop() {
+  @media (min-width: #{$laptop}) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin widescreen() {
+  @media (min-width: #{$widescreen}) {
+    @content;
+  }
+}

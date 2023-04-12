@@ -1,22 +1,21 @@
 <template>
-  <transition name="fade">
-    <section class="recent-ransaction-section">
-      <RecentTransactionItem
-        v-if="!transactions.length"
-        transactionName="No hay transacciones recientes."
-      />
-
-      <RecentTransactionItem
-        v-for="item in transactions"
-        :key="item.id"
-        :transactionName="item.transactionName"
-        :amount="item.amount"
-        :date="new Date(item.date).toLocaleDateString('es-MX', options)"
-        :transactionType="item.transactionType"
-      />
-      <Loader v-if="isLoading" />
-    </section>
-  </transition>
+  <h4 class="title">Historial de transacciones</h4>
+  <section class="transaction-history">
+    <Loader v-if="isLoading" class="history-loading" />
+    <TransactionItem
+      v-if="!transactions.length && !isLoading"
+      description="No hay transacciones registradas"
+    />
+    <TransactionItem
+      v-for="item in transactions"
+      :key="item.id"
+      :type="item.transactionType"
+      :title="item.transactionName"
+      :amount="item.amount"
+      :date="new Date(item.date).toLocaleDateString('es-MX', options)"
+      :description="item.description"
+    />
+  </section>
 </template>
 
 <script setup>
@@ -32,8 +31,9 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+import Layout from "@/components/layouts/Default.vue";
 import Loader from "@/components/public/Loader.vue";
-import RecentTransactionItem from "@/components/app/recentTransactions/RecentTransactionItem.vue";
+import TransactionItem from "@/components/app/transactionHistory/TransactionItem.vue";
 
 let isLoading = ref(true);
 let transactions = ref([]);
@@ -49,8 +49,7 @@ const options = {
 };
 
 onMounted(async () => {
-  getTransactions();
-  isLoading.value = false;
+  await getTransactions();
 });
 
 const getTransactions = async () => {
@@ -87,15 +86,45 @@ const getTransactions = async () => {
       .sort((a, b) => {
         return b.date.getDate() - a.date.getDate();
       });
+
+    isLoading.value = false;
   });
 };
 </script>
 
 <style lang="scss" scoped>
-.recent-ransaction-section {
+.title {
+  margin-bottom: 2rem;
+  color: $color-primary;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+
+  @include tablet {
+    font-size: 1.2rem;
+  }
+}
+
+.transaction-history {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  @include laptop {
+    height: calc(100vh - 240px);
+    max-width: 70%;
+    padding: 2px;
+    margin: auto;
+    overflow-y: auto;
+  }
+}
+
+.history-loading {
+  position: fixed;
+  height: calc(100% - 60px);
+}
+
+@media screen and (min-width: 1024px) {
+  .history-loading {
+    margin-left: 80px;
+    height: 100%;
+  }
 }
 </style>

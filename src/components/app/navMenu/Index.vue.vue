@@ -1,17 +1,19 @@
 <template>
   <nav class="nav-menu">
     <MenuItem
-      v-for="item in optMenu"
+      v-for="item in optionsMenu"
       :key="item.id"
       :label="item.label"
       :icon="item.icon"
+      :path="item.path"
+      :isActive="item.path === this.$route.path"
     />
   </nav>
 </template>
 
 <script>
-import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
 import MenuItem from "./MenuItem.vue";
+import { mdiHome, mdiCashMinus, mdiCashPlus, mdiCashClock } from "@mdi/js";
 
 export default {
   components: {
@@ -19,26 +21,30 @@ export default {
   },
   data() {
     return {
-      optMenu: [
+      optionsMenu: [
         {
           id: "1",
           icon: mdiHome,
           label: "Inicio",
+          path: "/",
         },
         {
           id: "2",
-          icon: mdiCashMinus,
+          icon: mdiCashPlus,
           label: "Ingreso",
+          path: "/add-income",
         },
         {
           id: "3",
-          icon: mdiCashPlus,
-          label: "Egreso",
+          icon: mdiCashMinus,
+          label: "Gasto",
+          path: "/add-outcome",
         },
         {
           id: "4",
           icon: mdiCashClock,
           label: "Historial",
+          path: "/historial-de-transacciones",
         },
       ],
     };
@@ -49,13 +55,24 @@ export default {
 <style lang="scss" scoped>
 .nav-menu {
   min-height: 60px;
-  padding: 0.5rem;
   width: 100%;
-  background: $bg-color-violet;
+  padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
   position: fixed;
   bottom: 0;
-  gap: 0.5rem;
+  background: $bg-color-violet;
+
+  @include laptop {
+    padding-top: 6rem;
+    height: 100%;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    position: fixed;
+    top: 0;
+  }
 }
 </style>
