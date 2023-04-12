@@ -103,7 +103,11 @@ export default {
             };
           })
           .sort((a, b) => {
-            return b.date.getDate() - a.date.getDate();
+            return b.date.getTime() - a.date.getTime();
+          })
+          .filter((tr) => {
+            const currMonth = new Date().getMonth();
+            return tr.date.getMonth() === currMonth;
           });
 
         this.income = this.transactions
