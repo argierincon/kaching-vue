@@ -25,6 +25,7 @@
       <option class="option" value="Arrendamiento">Arrendamiento</option>
       <option class="option" value="Víveres">Retiro</option>
       <option class="option" value="Víveres">Víveres</option>
+      <option class="option" value="Víveres">Alimentos y comida</option>
       <option class="option" value="Comida">Restaurantes y hoteles</option>
       <option class="option" value="Transporte">Transporte</option>
       <option class="option" value="Servicios basicos">
@@ -35,6 +36,7 @@
       </option>
       <option class="option" value="Imprevistos">Imprevistos</option>
       <option class="option" value="Ropa">Ropa y calzado</option>
+      <option class="option" value="Ropa">Accesorios</option>
       <option class="option" value="Decoración">Decoración hogar</option>
       <option class="option" value="Cuidado personal">Cuidado personal</option>
       <option class="option" value="Artículos de deporte">
