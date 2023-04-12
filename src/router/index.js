@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import History from "../views/History.vue";
+import AddIncome from "../views/AddIncome.vue";
+import AddOutcome from "../views/AddOutcome.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,7 +13,15 @@ const router = createRouter({
     { path: "/", component: Home },
     {
       path: "/historial-de-transacciones",
-      component: import("../components/app/transactionHistory/Index.vue"),
+      component: History,
+    },
+    {
+      path: "/add-income",
+      component: AddIncome,
+    },
+    {
+      path: "/add-outcome",
+      component: AddOutcome,
     },
     {
       path: "/:pathMatch(.*)*",
