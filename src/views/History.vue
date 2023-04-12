@@ -84,7 +84,7 @@ const getTransactions = async () => {
         };
       })
       .sort((a, b) => {
-        return b.date.getDate() - a.date.getDate();
+        return b.date.getTime() - a.date.getTime();
       });
 
     isLoading.value = false;
