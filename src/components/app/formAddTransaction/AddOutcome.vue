@@ -11,8 +11,9 @@
     >
       <option class="option" value="Transferencia">Transferencia</option>
       <option class="option" value="Efectivo">Efectivo</option>
-      <option class="option" value="Tarjeta">Tarjeta de débito</option>
-      <option class="option" value="Tarjeta">Tarjeta de crédito</option>
+      <option class="option" value="Qr App">QR App</option>
+      <option class="option" value="Débito">Tarjeta de débito</option>
+      <option class="option" value="Crédito">Tarjeta de crédito</option>
     </v-select>
 
     <v-select
@@ -68,7 +69,7 @@
     />
 
     <v-input
-      type="number"
+      type="text"
       label="Monto"
       placeholder="Ingresa el monto"
       v-model="amount"
