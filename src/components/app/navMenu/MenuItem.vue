@@ -1,8 +1,12 @@
 <template>
-  <div class="menu-item" :class="{ active: isActive }" @click="onClick">
-    <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
-    <p class="label">{{ label }}</p>
-  </div>
+  <router-link :to="path">
+    <div class="menu-item" :class="{ active: isActive }">
+      <svg-icon class="icon" type="mdi" :path="icon"></svg-icon>
+      <p class="label">
+        {{ label }}
+      </p>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -16,7 +20,7 @@ export default {
   props: {
     icon: { type: String, default: mdiBell },
     label: { type: String, default: "HOME" },
-    onClick: { type: Function, required: true },
+    path: { type: String, default: "/" },
     isActive: { type: Boolean, default: false },
   },
 };
