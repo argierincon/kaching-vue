@@ -88,15 +88,14 @@ const getTransactions = async () => {
     }, 0);
 
     // Lista de montos transformada para la gráfica
-    const last30Days = transactions.value.filter((m) => {
-      const today = new Date();
-      const lastDays = today.setDate(today.getDate() - 30);
+    const currentMonthDays = transactions.value.filter((m) => {
+      const currMonth = new Date().getMonth();
 
-      return m.date > lastDays;
+      return m.date.getMonth() === currMonth;
     });
 
-    listAmounts.value = last30Days.map((ele, i) => {
-      const lastTransactions = last30Days.slice(0, i + 1);
+    listAmounts.value = currentMonthDays.map((ele, i) => {
+      const lastTransactions = currentMonthDays.slice(0, i + 1);
 
       const suma = lastTransactions.reduce((suma, current) => {
         current.sum = suma + current.amount;
@@ -147,6 +146,18 @@ const formatingDate = (pointSelected) => {
 
   return pointSelected.date.toLocaleDateString("es-MX", options);
 };
+
+// ULTIMOS 30 DIAS
+// const last30Days = transactions.value.filter((m) => {
+//   const today = new Date();
+
+//   console.log(today.getMonth(), "T");
+//   console.log(m.date.getMonth(), "m.date");
+
+//   const lastDays = today.setDate(today.getDate() - 30);
+
+//   return m.date > lastDays;
+// });
 </script>
 
 <style lang="scss" scoped>

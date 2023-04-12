@@ -1,22 +1,20 @@
 <template>
-  <transition name="fade">
-    <section class="recent-ransaction-section">
-      <RecentTransactionItem
-        v-if="!transactions.length"
-        transactionName="No hay transacciones recientes."
-      />
+  <section class="recent-ransaction-section">
+    <RecentTransactionItem
+      v-if="!transactions.length"
+      transactionName="No hay transacciones recientes."
+    />
 
-      <RecentTransactionItem
-        v-for="item in transactions"
-        :key="item.id"
-        :transactionName="item.transactionName"
-        :amount="item.amount"
-        :date="new Date(item.date).toLocaleDateString('es-MX', options)"
-        :transactionType="item.transactionType"
-      />
-      <Loader v-if="isLoading" />
-    </section>
-  </transition>
+    <RecentTransactionItem
+      v-for="item in transactions"
+      :key="item.id"
+      :transactionName="item.transactionName"
+      :amount="item.amount"
+      :date="new Date(item.date).toLocaleDateString('es-MX', options)"
+      :transactionType="item.transactionType"
+    />
+    <Loader v-if="isLoading" />
+  </section>
 </template>
 
 <script setup>
@@ -86,6 +84,10 @@ const getTransactions = async () => {
       })
       .sort((a, b) => {
         return b.date.getDate() - a.date.getDate();
+      })
+      .filter((tr) => {
+        const currMonth = new Date().getMonth();
+        return tr.date.getMonth() === currMonth;
       });
   });
 };

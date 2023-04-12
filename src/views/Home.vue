@@ -104,6 +104,10 @@ export default {
           })
           .sort((a, b) => {
             return b.date.getDate() - a.date.getDate();
+          })
+          .filter((tr) => {
+            const currMonth = new Date().getMonth();
+            return tr.date.getMonth() === currMonth;
           });
 
         this.income = this.transactions
