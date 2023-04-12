@@ -1,34 +1,22 @@
 <template>
-  <Layout>
-    <template #main-content>
-      <section class="home-main">
-        <div class="main-left">
-          <div class="home-grid">
-            <BalanceBox class="balance" :balance="balance" />
-            <IncomeOutcomeBox
-              class="income"
-              label="Ingresos"
-              :amount="income"
-            />
-            <IncomeOutcomeBox
-              class="outcome"
-              label="Gastos"
-              :amount="outcome"
-            />
-          </div>
+  <section class="home-main">
+    <div class="main-left">
+      <div class="home-grid">
+        <BalanceBox class="balance" :balance="balance" />
+        <IncomeOutcomeBox class="income" label="Ingresos" :amount="income" />
+        <IncomeOutcomeBox class="outcome" label="Gastos" :amount="outcome" />
+      </div>
 
-          <NavigationTabs class="nav-tabs" :tabs="tabs" />
+      <NavigationTabs class="nav-tabs" :tabs="tabs" />
 
-          <SavingsChart class="tab-desktop home-chart" />
-        </div>
+      <SavingsChart class="tab-desktop home-chart" />
+    </div>
 
-        <div class="tab-desktop">
-          <h4 class="title">Transacciones recientes</h4>
-          <RecentTransactionsSection class="transactions-home" />
-        </div>
-      </section>
-    </template>
-  </Layout>
+    <div class="tab-desktop">
+      <h4 class="title">Transacciones recientes</h4>
+      <RecentTransactionsSection class="transactions-home" />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -36,8 +24,9 @@ import Layout from "@/components/layouts/Default.vue";
 import BalanceBox from "@/components/app/BalanceBox.vue";
 import IncomeOutcomeBox from "@/components/app/IncomeOutcomeBox.vue";
 import NavigationTabs from "@/components/app/NavigationTabs.vue";
-import SavingsChart from "@/components/app/homeChart/Index.vue";
+import SavingsChart from "../components/app/homeChart/Index.vue";
 import RecentTransactionsSection from "@/components/app/recentTransactions/Index.vue";
+
 import {
   collection,
   getFirestore,
