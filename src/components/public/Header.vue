@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 header {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   gap: 1rem;
   display: grid;
   grid-template-columns: 80px 1fr 30px;
