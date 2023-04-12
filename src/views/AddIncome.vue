@@ -15,4 +15,11 @@ import AddIncome from "../components/app/formAddTransaction/AddIncome.vue";
     margin: auto;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .max-w-sections {
+    max-width: 40%;
+    margin: auto;
+  }
+}
 </style>
