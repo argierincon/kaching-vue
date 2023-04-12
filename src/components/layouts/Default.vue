@@ -3,22 +3,9 @@
     <Header />
 
     <main>
-      <slot name="main-content"></slot>
+      <slot></slot>
     </main>
-    <MoblieModal
-      :showModal="showModalIncome"
-      @close="closeModalIncome"
-      closeOutside
-    >
-      <AddIncome :btnCancel="() => closeModalIncome()" />
-    </MoblieModal>
-    <MoblieModal
-      :showModal="showModalOutcome"
-      @close="closeModalOutcome"
-      closeOutside
-    >
-      <AddOutcome :btnCancel="() => closeModalOutcome()" />
-    </MoblieModal>
+
     <NavMenu :optionsMenu="optMenu" class="layout-menu" />
   </section>
 </template>
