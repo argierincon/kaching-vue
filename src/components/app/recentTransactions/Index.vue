@@ -11,6 +11,7 @@
       :transactionName="item.transactionName"
       :amount="item.amount"
       :date="new Date(item.date).toLocaleDateString('es-MX', options)"
+      :trMode="item.type"
       :transactionType="item.transactionType"
     />
     <Loader v-if="isLoading" />
