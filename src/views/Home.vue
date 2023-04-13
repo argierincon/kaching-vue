@@ -96,7 +96,7 @@ export default {
               category: ele.data?.category,
               type: ele.data.type,
               transactionName: ele.data.name,
-              amount: ele.data.amount,
+              amount: parseInt(ele.data.amount),
               description: ele.data?.description,
               holder: ele.data?.holder,
               uid: ele.data.uid,

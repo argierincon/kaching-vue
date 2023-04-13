@@ -6,6 +6,9 @@
       v-if="!transactions.length && !isLoading"
       description="No hay transacciones registradas"
     />
+
+    <GraphicHistory />
+
     <TransactionItem
       v-for="item in transactions"
       :key="item.id"
@@ -32,9 +35,9 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-import Layout from "@/components/layouts/Default.vue";
 import Loader from "@/components/public/Loader.vue";
 import TransactionItem from "@/components/app/transactionHistory/TransactionItem.vue";
+import GraphicHistory from "../components/app/homeChart/GraphicHistory.vue";
 
 let isLoading = ref(true);
 let transactions = ref([]);
@@ -78,7 +81,7 @@ const getTransactions = async () => {
           category: ele.data?.category,
           type: ele.data.type,
           transactionName: ele.data.name,
-          amount: ele.data.amount,
+          amount: parseInt(ele.data.amount),
           description: ele.data?.description,
           holder: ele.data?.holder,
           uid: ele.data.uid,

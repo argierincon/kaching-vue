@@ -1,6 +1,5 @@
 <template>
   <section class="chart-section">
-    <p class="label-saved">Disponible</p>
     <p class="label-saved">{{ graphicLabel }}</p>
     <h6 class="amount-saved">
       {{ currencyFormater.format(showAmount) }}
@@ -88,13 +87,14 @@ const getTransactions = async () => {
     }, 0);
 
     // Lista de montos transformada para la gráfica
-    const currentMonthDays = transactions.value.filter((m) => {
-      const currMonth = new Date().getMonth();
+    // const currentMonthDays = transactions.value.filter((m) => {
+    //   const currMonth = new Date().getMonth();
 
-      return m.date.getMonth() === currMonth;
-    });
-    listAmounts.value = currentMonthDays.map((ele, i) => {
-      const lastTransactions = currentMonthDays.slice(0, i + 1);
+    //   return m.date.getMonth() === currMonth;
+    // });
+
+    listAmounts.value = transactions.value.map((ele, i) => {
+      const lastTransactions = transactions.value.slice(0, i + 1);
 
       const suma = lastTransactions.reduce((suma, current) => {
         current.sum = suma + current.amount;
