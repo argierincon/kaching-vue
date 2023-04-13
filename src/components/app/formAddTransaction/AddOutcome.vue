@@ -9,11 +9,9 @@
       required
       hasMiniLabel
     >
-      <option class="option" value="Transferencia">Transferencia</option>
-      <option class="option" value="Efectivo">Efectivo</option>
-      <option class="option" value="Qr App">QR App</option>
-      <option class="option" value="Débito">Tarjeta de débito</option>
-      <option class="option" value="Crédito">Tarjeta de crédito</option>
+      <option v-for="item in outcType" :key="item" class="option" :value="item">
+        {{ item }}
+      </option>
     </v-select>
 
     <v-select
@@ -23,45 +21,14 @@
       required
       hasMiniLabel
     >
-      <option class="option" value="Arrendamiento">Arrendamiento</option>
-      <option class="option" value="Retiro">Retiro</option>
-      <option class="option" value="Víveres">Víveres</option>
-      <option class="option" value="Alimentos y comida">
-        Alimentos y comida
+      <option
+        v-for="item in outcomeCategories"
+        :key="item"
+        class="option"
+        :value="item"
+      >
+        {{ item }}
       </option>
-      <option class="option" value="Restaurantes y hoteles">
-        Restaurantes y hoteles
-      </option>
-      <option class="option" value="Transporte">Transporte</option>
-      <option class="option" value="Servicios basicos">
-        Servicios basicos
-      </option>
-      <option class="option" value="Servicios generales">
-        Servicios generales
-      </option>
-      <option class="option" value="Imprevistos">Imprevistos</option>
-      <option class="option" value="Ropa">Ropa y calzado</option>
-      <option class="option" value="Accesorios">Accesorios</option>
-      <option class="option" value="Decoración">Decoración hogar</option>
-      <option class="option" value="Cuidado personal">Cuidado personal</option>
-      <option class="option" value="Artículos de deporte">
-        Artículos de deporte
-      </option>
-      <option class="option" value="Medicina y salud">Medicina y salud</option>
-      <option class="option" value="Telecomunicaciones">
-        Telecomunicaciones
-      </option>
-      <option class="option" value="Educación">Educación</option>
-      <option class="option" value="Ahorro">Ahorro</option>
-      <option class="option" value="Cuota TDC">Cuota TDC</option>
-      <option class="option" value="Reparaciones">Reparaciones</option>
-      <option class="option" value="Entretenimiento y ocio">
-        Entretenimiento y ocio
-      </option>
-      <option class="option" value="Cuidado del hogar">
-        Reparaciones y cuidado del hogar
-      </option>
-      <option class="option" value="Remesas">Remesas</option>
     </v-select>
 
     <v-input
@@ -91,15 +58,18 @@
 </template>
 
 <script setup>
-import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { defineProps, toRefs, ref, reactive, computed } from "vue";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { useRouter } from "vue-router";
+
+import { outcomeCategories, outcType } from "../../../../utils/arrCategories";
 
 import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
 import vInput from "@/components/app/inputs/Input.vue";
 import vSelect from "@/components/app/inputs/Select.vue";
 import vTextarea from "@/components/app/inputs/Textarea.vue";
+console.log(outcomeCategories, "outcomeCategories");
 
 const router = useRouter();
 

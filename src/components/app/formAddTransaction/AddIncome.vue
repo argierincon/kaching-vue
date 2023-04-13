@@ -10,8 +10,9 @@
       required
       hasMiniLabel
     >
-      <option value="Transferencia">Transferencia</option>
-      <option value="Efectivo">Efectivo</option>
+      <option v-for="item in incType" :key="item" class="option" :value="item">
+        {{ item }}
+      </option>
     </v-select>
 
     <v-input
@@ -50,6 +51,8 @@
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { defineProps, toRefs, ref, reactive, computed } from "vue";
 import { useRouter } from "vue-router";
+
+import { incType } from "../../../../utils/arrCategories";
 
 import Loader from "@/components/public/Loader.vue";
 import Btn from "@/components/public/Btn.vue";
