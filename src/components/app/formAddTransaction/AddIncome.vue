@@ -23,12 +23,12 @@
     />
 
     <v-input
-      type="number"
       label="Monto"
       placeholder="Ingresa el monto"
       v-model="amount"
       required
       hasMiniLabel
+      pattern="^\d*(\.\d{0,2})?$"
     />
 
     <v-input
@@ -61,11 +61,6 @@ const router = useRouter();
 
 const db = getFirestore();
 const colRef = collection(db, "transactions");
-
-// const props = defineProps({
-//   btnCancel: { type: Function },
-// });
-// const { btnCancel } = toRefs(props);
 
 let isLoading = ref(false);
 const today = ref(null);
