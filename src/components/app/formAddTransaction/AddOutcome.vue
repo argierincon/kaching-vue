@@ -69,7 +69,6 @@ import Btn from "@/components/public/Btn.vue";
 import vInput from "@/components/app/inputs/Input.vue";
 import vSelect from "@/components/app/inputs/Select.vue";
 import vTextarea from "@/components/app/inputs/Textarea.vue";
-console.log(outcomeCategories, "outcomeCategories");
 
 const router = useRouter();
 
