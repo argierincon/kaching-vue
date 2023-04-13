@@ -8,9 +8,9 @@
     }"
   >
     <div class="item-transaction__header">
-      <button v-show="amount" class="ellipsis-icon">
+      <!-- <button v-show="amount" class="ellipsis-icon">
         <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
-      </button>
+      </button> -->
       <div v-show="amount" class="transaction-name">
         <div class="tr-name">
           <svg-icon type="mdi" size="20" :path="elemsItem.icon"></svg-icon>
@@ -104,17 +104,6 @@ switch (type.value) {
   }
 
   &__header {
-    // display: flex;
-    // gap: 0.5rem;
-    // display: grid;
-    // grid-template-columns: 20px 1fr auto 10px;
-    // align-items: center;
-    // gap: 0.5rem;
-
-    // @include tablet {
-    //   grid-template-columns: 20px 1fr auto 15px;
-    // }
-
     p {
       font-weight: 600;
       font-size: 0.9rem;
