@@ -1,18 +1,23 @@
 <template>
   <div class="box-tr" :class="elemsItem.class">
     <article class="box-transaction">
-      <svg-icon
-        class="box-transaction__icon"
-        type="mdi"
-        :path="elemsItem.icon"
-        :size="18"
-      ></svg-icon>
-      <p class="box-transaction__name">{{ transactionName }}</p>
+      <div class="box-transaction__div">
+        <svg-icon
+          class="box-transaction__icon"
+          type="mdi"
+          :path="elemsItem.icon"
+          :size="18"
+        ></svg-icon>
+        <p class="box-transaction__name">{{ transactionName }}</p>
+      </div>
       <p v-show="amount" class="box-transaction__amount">
         {{ currencyAmount }}
       </p>
     </article>
-    <p class="transaction-date">{{ date }}</p>
+    <div class="transaction-tag" v-show="amount">
+      <p class="date">{{ date }}</p>
+      <p class="tag" :class="elemsItem.tag">{{ trMode }}</p>
+    </div>
   </div>
 </template>
 
@@ -29,10 +34,11 @@ const props = defineProps({
   },
   amount: { type: Number, default: 0 },
   date: { type: String },
+  trMode: { type: String },
   transactionType: { type: String, default: "" },
 });
 
-const { name, amount, transactionType } = toRefs(props);
+const { name, amount, transactionType, trMode } = toRefs(props);
 
 const currencyAmount = computed(() => currencyFormater.format(amount.value));
 let elemsItem = reactive({
@@ -44,6 +50,7 @@ switch (transactionType.value) {
   case "income":
     elemsItem = {
       class: "income",
+      tag: "tag-income",
       icon: mdiArrowTopRight,
     };
     break;
@@ -51,6 +58,7 @@ switch (transactionType.value) {
   case "outcome":
     elemsItem = {
       class: "outcome",
+      tag: "tag-outcome",
       icon: mdiArrowBottomRight,
     };
     break;
@@ -58,6 +66,7 @@ switch (transactionType.value) {
   default:
     elemsItem = {
       class: "",
+      tag: "",
       icon: mdiMagnify,
     };
     break;
@@ -66,21 +75,30 @@ switch (transactionType.value) {
 
 <style lang="scss" scoped>
 .box-tr {
-  padding: 0.8rem;
+  padding: 10px 12px 10px 8px;
   background-color: $color-white;
   border-radius: 6px;
   border-left: 4px solid $color-primary;
   filter: drop-shadow(0px 0px 1px rgba(23, 43, 77, 0.2));
+
+  @include tablet {
+    padding: 0.8rem;
+  }
 }
 
 .box-transaction {
   width: 100%;
-  display: grid;
-  // grid-template-columns: 20px 1fr;
-  // grid-template-columns: 20px 1fr 100px;
-  grid-template-columns: 20px 1fr 100px;
-  align-items: center;
-  gap: 0.5rem;
+
+  @include tablet {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 0.5rem;
+  }
+
+  &__div {
+    display: flex;
+    gap: 0.5rem;
+  }
 
   &__name,
   &__amount {
@@ -93,6 +111,7 @@ switch (transactionType.value) {
   }
 
   &__amount {
+    width: fit-content;
     margin-left: auto;
   }
 }
@@ -107,10 +126,39 @@ switch (transactionType.value) {
   color: $color-red;
 }
 
-.transaction-date {
+.transaction-tag {
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 6px;
+}
+
+.tag {
+  padding: 1px 0.75em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.tag-income {
+  background-color: #d7f8e9;
+  color: $color-green-variant;
+}
+
+.tag-outcome {
+  background-color: #feecf0;
+  color: $color-red;
+}
+
+.date {
   font-size: 11px;
   width: fit-content;
-  margin-left: auto;
-  margin-top: 2px;
+
+  @include laptop {
+    font-size: 13px;
+  }
 }
 </style>

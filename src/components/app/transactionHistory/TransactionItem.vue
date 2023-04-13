@@ -7,15 +7,26 @@
       outcome: type === 'outcome',
     }"
   >
-    <!-- <button v-show="amount" class="ellipsis-icon">
-      <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
-    </button> -->
-    <div v-show="amount" class="item-transaction__header">
-      <svg-icon type="mdi" size="20" :path="elemsItem.icon"></svg-icon>
-      <p class="transaction-title">{{ title }}</p>
-      <p class="transaction-amount">{{ currencyAmount }}</p>
+    <div class="item-transaction__header">
+      <button v-show="amount" class="ellipsis-icon">
+        <svg-icon type="mdi" size="20" :path="mdiDotsVertical"></svg-icon>
+      </button>
+      <div v-show="amount" class="transaction-name">
+        <div class="tr-name">
+          <svg-icon type="mdi" size="20" :path="elemsItem.icon"></svg-icon>
+          <p class="transaction-title">{{ title }}</p>
+        </div>
+        <p class="transaction-amount">{{ currencyAmount }}</p>
+      </div>
     </div>
-    <p class="transaction-date">{{ date }}</p>
+
+    <div class="transaction-tag" v-show="amount">
+      <p class="date">{{ date }}</p>
+      <p class="tag" :class="elemsItem.tag">
+        {{ trMode }}
+      </p>
+    </div>
+    <!-- <p class="transaction-date">{{ date }}</p> -->
     <div v-if="!amount" class="content-default">
       <svg-icon type="mdi" size="20" :path="mdiMagnify"></svg-icon>
       <p>{{ description }}</p>
@@ -43,6 +54,7 @@ const props = defineProps({
   title: { type: String },
   amount: { type: String },
   date: { type: String },
+  trMode: { type: String },
   description: { type: String },
 });
 
@@ -58,21 +70,21 @@ let elemsItem = reactive({
 switch (type.value) {
   case "income":
     elemsItem = {
-      class: "income",
+      tag: "tag-income",
       icon: mdiArrowTopRight,
     };
     break;
 
   case "outcome":
     elemsItem = {
-      class: "outcome",
+      tag: "tag-outcome",
       icon: mdiArrowBottomRight,
     };
     break;
 
   default:
     elemsItem = {
-      class: "",
+      tag: "",
       icon: mdiMagnify,
     };
     break;
@@ -81,7 +93,7 @@ switch (type.value) {
 
 <style lang="scss" scoped>
 .item-transaction {
-  padding: 1rem;
+  padding: 10px;
   position: relative;
   border-radius: 6px;
   background: #e6f9ff;
@@ -92,14 +104,16 @@ switch (type.value) {
   }
 
   &__header {
-    display: grid;
-    grid-template-columns: 20px 1fr auto 10px;
-    align-items: center;
-    gap: 0.5rem;
+    // display: flex;
+    // gap: 0.5rem;
+    // display: grid;
+    // grid-template-columns: 20px 1fr auto 10px;
+    // align-items: center;
+    // gap: 0.5rem;
 
-    @include tablet {
-      grid-template-columns: 20px 1fr auto 15px;
-    }
+    // @include tablet {
+    //   grid-template-columns: 20px 1fr auto 15px;
+    // }
 
     p {
       font-weight: 600;
@@ -124,6 +138,31 @@ switch (type.value) {
       }
     }
   }
+}
+
+.tr-name {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.transaction-name {
+  @include tablet {
+    display: flex;
+    padding-right: 24px;
+  }
+}
+
+.transaction-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.transaction-amount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: fit-content;
+  margin-left: auto;
 }
 
 .mb-tr {
@@ -156,20 +195,40 @@ switch (type.value) {
   color: $color-black-blue;
 }
 
-.transaction-title {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.transaction-tag {
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 6px;
 }
 
-.transaction-amount {
-  margin-left: auto;
+.tag {
+  padding: 1px 0.75em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 11px;
+  color: $color-white;
 }
 
-.transaction-date {
+.tag-income {
+  background-color: $color-green-variant;
+}
+
+.tag-outcome {
+  background-color: $color-red-variant;
+}
+
+.date {
   font-size: 11px;
   width: fit-content;
   margin-left: auto;
   margin-top: 2px;
+
+  @include laptop {
+    font-size: 13px;
+  }
 }
 </style>
