@@ -7,7 +7,9 @@
       description="No hay transacciones registradas"
     />
 
-    <GraphicHistory />
+    <div class="chart-box">
+      <GraphicHistory />
+    </div>
 
     <TransactionItem
       v-for="item in transactions"
@@ -97,6 +99,22 @@ const getTransactions = async () => {
 </script>
 
 <style lang="scss" scoped>
+.chart-box {
+  margin-bottom: 2rem;
+
+  @include tablet {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+
+  @include desktop {
+    width: 36%;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+}
+
 .title {
   margin-bottom: 2rem;
   color: $color-primary;
@@ -123,10 +141,8 @@ const getTransactions = async () => {
 .history-loading {
   position: fixed;
   height: calc(100% - 60px);
-}
 
-@media screen and (min-width: 1024px) {
-  .history-loading {
+  @include laptop {
     margin-left: 80px;
     height: 100%;
   }

@@ -34,7 +34,7 @@
         y2="200"
       />
     </svg>
-    <p class="graphic__label">Últimos 30 días</p>
+    <!-- <p class="graphic__label">Últimos 30 días</p> -->
   </div>
 </template>
 
