@@ -80,7 +80,7 @@ const getTransactions = async () => {
     });
 
     transactions.value = allTransactions.sort((a, b) => {
-      return a.date.getDate() - b.date.getDate();
+      return a.date.getTime() - b.date.getTime();
     });
 
     totalAmount.value = transactions.value.reduce((suma, m) => {
@@ -93,7 +93,6 @@ const getTransactions = async () => {
 
       return m.date.getMonth() === currMonth;
     });
-
     listAmounts.value = currentMonthDays.map((ele, i) => {
       const lastTransactions = currentMonthDays.slice(0, i + 1);
 
