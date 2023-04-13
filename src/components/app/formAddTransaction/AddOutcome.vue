@@ -69,7 +69,6 @@
     />
 
     <v-input
-      type="text"
       label="Monto"
       placeholder="Ingresa el monto"
       v-model="amount"
@@ -101,11 +100,6 @@ const router = useRouter();
 
 const db = getFirestore();
 const colRef = collection(db, "transactions");
-
-// const props = defineProps({
-//   btnCancel: { type: Function, default: () => console.log("PRUEB") },
-// });
-// const { btnCancel } = toRefs(props);
 
 let isLoading = ref(false);
 const form = ref("");
@@ -143,6 +137,8 @@ const submit = async () => {
 
   console.log("Document was created with ID:", docRef.id);
 
+  outcomeType.value = "";
+  outcomeCategory.value = "";
   form.value.reset();
 };
 

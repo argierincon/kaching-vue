@@ -99,6 +99,7 @@ const submit = async () => {
 
   console.log("Document was created with ID:", docRef.id);
 
+  incomeType.value = "";
   form.value.reset();
 };
 
