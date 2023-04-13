@@ -17,6 +17,7 @@
       :placeholder="placeholder"
       :required="required"
       :disabled="disabled"
+      :pattern="pattern"
     />
   </div>
 </template>

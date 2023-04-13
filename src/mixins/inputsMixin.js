@@ -5,8 +5,9 @@ export default {
     hasMiniLabel: { type: Boolean, default: false },
     miniLabelType: { type: String, default: "required" },
     placeholder: { type: String, default: "Placeholder" },
-    required: { type: String, default: false },
-    disabled: { type: String, default: false },
+    required: { type: Boolean, default: false },
+    pattern: { type: String },
+    disabled: { type: Boolean, default: false },
   },
   computed: {
     localModel: {
