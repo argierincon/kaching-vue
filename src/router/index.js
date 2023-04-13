@@ -9,7 +9,7 @@ import AddOutcome from "../views/AddOutcome.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/login", component: Login },
+    { path: "/login", component: Login, meta: { layout: "blank" } },
     { path: "/", component: Home },
     {
       path: "/historial-de-transacciones",
