@@ -77,7 +77,7 @@ const getTransactions = async () => {
           category: ele.data?.category,
           type: ele.data.type,
           transactionName: ele.data.name,
-          amount: parseInt(ele.data.amount),
+          amount: parseFloat(ele.data.amount),
           description: ele.data?.description,
           holder: ele.data?.holder,
           uid: ele.data.uid,
